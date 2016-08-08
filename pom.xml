@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>lv.ctco.zephyr</groupId>
+    <artifactId>zephyr-sync-master</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>zephyr-sync-core</module>
+        <module>zephyr-sync-report-api</module>
+        <module>zephyr-sync-report-cucumber</module>
+        <module>zephyr-sync-report-junit</module>
+        <module>zephyr-sync-util</module>
+        <module>zephyr-sync-report-allure</module>
+        <module>zephyr-sync-cli</module>
+        <module>zephyr-sync-maven-plugin</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
