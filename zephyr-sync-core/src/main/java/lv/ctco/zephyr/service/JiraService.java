@@ -8,6 +8,7 @@ import lv.ctco.zephyr.beans.jira.Issue;
 import lv.ctco.zephyr.beans.jira.IssueLink;
 import lv.ctco.zephyr.beans.jira.SearchResponse;
 import lv.ctco.zephyr.transformer.TestCaseToIssueTransformer;
+import lv.ctco.zephyr.util.HttpUtils;
 import lv.ctco.zephyr.util.ObjectTransformer;
 import org.apache.http.HttpResponse;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static lv.ctco.zephyr.enums.ConfigProperty.FORCE_STORY_LINK;
 import static lv.ctco.zephyr.enums.ConfigProperty.PROJECT_KEY;
+import static lv.ctco.zephyr.util.HttpUtils.*;
 import static lv.ctco.zephyr.util.Utils.log;
 import static lv.ctco.zephyr.util.Utils.readInputStream;
 import static java.lang.String.format;

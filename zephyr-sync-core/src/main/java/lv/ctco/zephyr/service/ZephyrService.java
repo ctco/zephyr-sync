@@ -8,6 +8,7 @@ import lv.ctco.zephyr.beans.zapi.Execution;
 import lv.ctco.zephyr.beans.zapi.ExecutionRequest;
 import lv.ctco.zephyr.beans.zapi.ExecutionResponse;
 import lv.ctco.zephyr.beans.zapi.ZapiTestStep;
+import lv.ctco.zephyr.enums.ConfigProperty;
 import lv.ctco.zephyr.enums.TestStatus;
 import lv.ctco.zephyr.util.HttpUtils;
 import lv.ctco.zephyr.util.ObjectTransformer;
@@ -20,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lv.ctco.zephyr.enums.ConfigProperty.*;
+import static lv.ctco.zephyr.util.HttpUtils.*;
 import static lv.ctco.zephyr.util.Utils.log;
 import static java.lang.String.format;
 
@@ -95,7 +98,7 @@ public class ZephyrService {
         execution.setIssues(keys);
 
         HttpResponse response = post(config, "zapi/latest/execution/addTestsToCycle", execution);
-        HttpUtils.ensureResponse(response, 200, "Could not link Test cases");
+        ensureResponse(response, 200, "Could not link Test cases");
     }
 
     public void updateExecutionStatuses(List<TestCase> resultTestCases) throws IOException {
