@@ -10,13 +10,13 @@
     <packaging>pom</packaging>
 
     <scm>
-        <connection>scm:git:git@github.com:sergeytrasko/zephyr-sync.git</connection>
-        <developerConnection>scm:git:git@github.com:sergeytrasko/zephyr-sync.git</developerConnection>
-        <url>git@github.com:sergeytrasko/zephyr-sync.git</url>
+        <connection>scm:git:git@github.com:ctco/zephyr-sync.git</connection>
+        <developerConnection>scm:git:git@github.com:ctco/zephyr-sync.git</developerConnection>
+        <url>git@github.com:ctco/zephyr-sync.git</url>
         <tag>HEAD</tag>
     </scm>
 
-    <url>https://github.com/sergeytrasko/zephyr-sync</url>
+    <url>https://github.com/ctco/zephyr-sync</url>
 
     <licenses>
         <license>
