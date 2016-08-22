@@ -14,6 +14,12 @@
         <tag>HEAD</tag>
     </scm>
 
+    <name>zephyr-sync-master</name>
+    <description>
+        Zephyr Sync is a tool, that allows your project to perform synchronization of automated test results to Zephyr - a JIRA addon for Test Management.
+        The advanced configuration of the tool supports multiple report types to work with, as well as some restrictions to be applied during the sync.
+    </description>
+
     <url>https://github.com/ctco/zephyr-sync</url>
 
     <licenses>
