@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/ctco/zephyr-sync/branch/master/build_image)](https://snap-ci.com/ctco/zephyr-sync/branch/master)
+
 # Zephyr Sync
 
 ## Overview
@@ -19,12 +21,12 @@ The configuration is very simple and should be done in `pom.xml`
 <plugin>
     <groupId>lv.ctco.zephyr</groupId>
     <artifactId>zephyr-sync-maven-plugin</artifactId>
-    <version>0.0.1</version>
+    <version>${zephyr-sync.version}</version>
     <dependencies>
         <dependency>
             <groupId>lv.ctco.zephyr</groupId>
             <artifactId>zephyr-sync-report-cucumber</artifactId>
-            <version>0.0.1</version>
+            <version>${zephyr-sync.version}</version>
         </dependency>
     </dependencies>
     <configuration>
@@ -40,7 +42,7 @@ The configuration is very simple and should be done in `pom.xml`
 ```
 
 #### Using maven-exec-plugin (deprecated)
-First of all - declare dependency to `zephyr-sync-code`:
+First of all - declare dependency to `zephyr-sync-core`:
 
 ```
 <dependencies>
@@ -48,7 +50,7 @@ First of all - declare dependency to `zephyr-sync-code`:
     <dependency>
         <groupId>lv.ctco.zephyr</groupId>
         <artifactId>zephyr-sync-core</artifactId>
-        <version>0.0.1</version>
+        <version>${zephyr-sync.version}</version>
     </dependency>
 </dependencies>
 ```
@@ -90,7 +92,7 @@ For complete list of attributes refer to sections below.
 ### Command Line Interface
 
 ```
-java -jar zephyr-sync-cli-0.0.1-all-in-one.jar --username=SPCABC --password=123456 --reportType=cucumber --projectKey=ABC --releaseVersion="Release 2.1" --jiraUrl=http://jira.yourcompany.com/rest/ --reportPath=build/cucumber-report/report.json
+java -jar zephyr-sync-cli-${zephyr-sync.version}-all-in-one.jar --username=SPCABC --password=123456 --reportType=cucumber --projectKey=ABC --releaseVersion="Release 2.1" --jiraUrl=http://jira.yourcompany.com/rest/ --reportPath=build/cucumber-report/report.json
 ```
 
 ### Using Gradle (using CLI)
