@@ -125,3 +125,4 @@ orderedSteps | If set to true, numerical prefix for test steps will be put (hier
 forceStoryLink | If set to true, sync will be failed in case at least one test doesn't have @Stories=ABC-XXX annotation | no | `true` |
 testCaseUniqueIdAttribute | Name of JIRA attribute that is used to store unique ID of test case (will be used for test case tracking, updates and linking) | no | `environment` |
 severityAttribute | Name of JIRA attribute that stores 'Severity' attribute | no | `customfield_10067` |
+autoCreateTestCycle | Should new test cycle be created automatically | no | `true` |

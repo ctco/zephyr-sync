@@ -2,9 +2,18 @@ package lv.ctco.zephyr.beans.zapi;
 
 public class Cycle {
 
+    private String id;
     private String projectKey;
     private Integer versionId;
     private String name;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getProjectKey() {
         return projectKey;
