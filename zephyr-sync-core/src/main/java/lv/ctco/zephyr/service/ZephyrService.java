@@ -44,7 +44,7 @@ public class ZephyrService {
 
         ExecutionResponse executionResponse = searchInZQL(search, skip);
         if (executionResponse == null || executionResponse.getExecutions().isEmpty()) {
-            return null;
+            return new HashMap<String, Execution>();
         }
 
         List<Execution> executions = executionResponse.getExecutions();
@@ -75,7 +75,7 @@ public class ZephyrService {
         List<String> keys = new ArrayList<String>();
 
         for (TestCase testCase : testCases) {
-            if (executions == null || executions.get(testCase.getKey()) == null) {
+            if (!executions.containsKey(testCase.getKey())) {
                 keys.add(testCase.getKey());
             }
         }
@@ -109,7 +109,9 @@ public class ZephyrService {
         for (TestCase testCase : resultTestCases) {
             TestStatus status = testCase.getStatus();
             List<String> ids = statusMap.get(status);
-            if (ids == null) statusMap.put(status, new ArrayList<String>());
+            if (ids == null) {
+                statusMap.put(status, new ArrayList<String>());
+            }
             Execution execution = executions.get(testCase.getKey());
             if (execution != null) {
                 statusMap.get(status).add(execution.getId().toString());
