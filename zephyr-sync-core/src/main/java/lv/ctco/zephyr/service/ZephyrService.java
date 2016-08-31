@@ -53,7 +53,11 @@ public class ZephyrService {
         if (totalCount > TOP) {
             while (executions.size() != totalCount) {
                 skip += TOP;
-                executions.addAll(searchInZQL(search, skip).getExecutions());
+                List<Execution> nextPageExecutions = searchInZQL(search, skip).getExecutions();
+                if (nextPageExecutions.isEmpty()) {
+                    break;
+                }
+                executions.addAll(nextPageExecutions);
             }
         }
         Map<String, Execution> result = new HashMap<String, Execution>(executions.size());
