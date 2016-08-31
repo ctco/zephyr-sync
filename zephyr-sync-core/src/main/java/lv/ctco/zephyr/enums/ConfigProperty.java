@@ -14,7 +14,8 @@ public enum ConfigProperty {
     ORDERED_STEPS("orderedSteps", false, "false"),
     FORCE_STORY_LINK("forceStoryLink", false, "true"),
     TEST_CASE_UNIQUE_ID("testCaseUniqueIdAttribute", false, "environment"),
-    SEVERITY("severityAttribute", false, "customfield_10067")
+    SEVERITY("severityAttribute", false, "customfield_10067"),
+    AUTO_CREATE_TEST_CYCLE("autoCreateTestCycle", false, "true")
     ;
 
     private String propertyName;
