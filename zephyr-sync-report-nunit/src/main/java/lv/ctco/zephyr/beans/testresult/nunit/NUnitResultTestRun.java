@@ -1,4 +1,4 @@
-package lv.ctco.zephyr.beans.testresult.cucumber;
+package lv.ctco.zephyr.beans.testresult.nunit;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 public class NUnitResultTestRun {
 
     @XmlElement(name = "test-suite")
-    List<NUnitTestSuite> testSuites;
+    private List<NUnitTestSuite> testSuites;
 
     public List<NUnitTestSuite> getTestSuite() {
         if (testSuites == null) {

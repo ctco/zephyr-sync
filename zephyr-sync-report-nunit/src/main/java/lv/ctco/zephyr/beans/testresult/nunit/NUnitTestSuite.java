@@ -1,4 +1,4 @@
-package lv.ctco.zephyr.beans.testresult.cucumber;
+package lv.ctco.zephyr.beans.testresult.nunit;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -14,35 +14,35 @@ public class NUnitTestSuite {
 
     @XmlMixed
     @XmlElementRef(name = "test-suite", type = NUnitTestSuite.class, required = true)
-    protected List<NUnitTestSuite> testSuite;
+    private List<NUnitTestSuite> testSuite;
 
     @XmlElement(name = "test-case")
-    protected List<NUnitTestCase> testcase;
+    private List<NUnitTestCase> testcase;
 
     @XmlAttribute(name = "id")
-    protected String id;
+    private String id;
     @XmlAttribute(name = "name")
-    protected String name;
+    private String name;
     @XmlAttribute(name = "type")
-    protected String type;
+    private String type;
 
     public List<NUnitTestSuite> getTestSuite() {
         if (testSuite == null) {
-            testSuite = new ArrayList<NUnitTestSuite>();
+            testSuite = new ArrayList<>();
         }
         return this.testSuite;
     }
 
     public List<NUnitTestCase> getTestCases() {
         if (testcase == null) {
-            testcase = new ArrayList<NUnitTestCase>();
+            testcase = new ArrayList<>();
         }
         return this.testcase;
     }
 
     public List<NUnitTestSuite> flattenTestSuite() {
         List<NUnitTestSuite> result = new ArrayList<>();
-        if (!getTestSuite().isEmpty()) result.addAll(testSuite);
+        result.add(this);
         for (NUnitTestSuite nUnitTestSuite : getTestSuite()) {
             result.addAll(nUnitTestSuite.flattenTestSuite());
         }

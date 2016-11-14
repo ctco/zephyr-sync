@@ -1,4 +1,4 @@
-package lv.ctco.zephyr.beans.testresult.cucumber;
+package lv.ctco.zephyr.beans.testresult.nunit;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;

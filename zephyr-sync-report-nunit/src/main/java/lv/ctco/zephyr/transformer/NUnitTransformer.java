@@ -2,9 +2,9 @@ package lv.ctco.zephyr.transformer;
 
 import lv.ctco.zephyr.ZephyrSyncException;
 import lv.ctco.zephyr.beans.TestCase;
-import lv.ctco.zephyr.beans.testresult.cucumber.NUnitResultTestRun;
-import lv.ctco.zephyr.beans.testresult.cucumber.NUnitTestCase;
-import lv.ctco.zephyr.beans.testresult.cucumber.NUnitTestSuite;
+import lv.ctco.zephyr.beans.testresult.nunit.NUnitResultTestRun;
+import lv.ctco.zephyr.beans.testresult.nunit.NUnitTestCase;
+import lv.ctco.zephyr.beans.testresult.nunit.NUnitTestSuite;
 import lv.ctco.zephyr.enums.TestStatus;
 
 import javax.xml.bind.JAXBContext;
@@ -22,38 +22,26 @@ public class NUnitTransformer implements ReportTransformer {
         return "nunit";
     }
 
-    List<NUnitTestSuite> testSuites = new ArrayList<>();
-
     public List<TestCase> transformToTestCases(String reportPath) {
-        try {
             return transform(readNunitReport(reportPath));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
-    NUnitResultTestRun readNunitReport(String path) throws Exception {
+    NUnitResultTestRun readNunitReport(String path) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(NUnitResultTestRun.class);
 
             XMLInputFactory xif = XMLInputFactory.newFactory();
             XMLStreamReader xsr = xif.createXMLStreamReader(new StreamSource(path));
-            xsr = xif.createFilteredReader(xsr, reader -> {
-                if (reader.getEventType() == XMLStreamReader.CHARACTERS) {
-                    return reader.getText().trim().length() > 0;
-                }
-                return true;
-            });
+            xsr = xif.createFilteredReader(xsr, r -> r.getEventType() != XMLStreamReader.CHARACTERS || r.getText().trim().length() > 0);
             return (NUnitResultTestRun) jaxbContext.createUnmarshaller().unmarshal(xsr);
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             throw new ZephyrSyncException("Cannot process NUnit report", e);
         }
     }
 
     List<TestCase> transform(NUnitResultTestRun resultTestSuite) {
         // NUnit places project name to the first test suite
-        List<NUnitTestSuite> nUnitTestSuites = resultTestSuite.getTestSuite().get(0).flattenTestSuite();
+        List<NUnitTestSuite> nUnitTestSuites = resultTestSuite.getTestSuite().stream().findFirst().get().flattenTestSuite();
         // NUnit places test cases in the last test suite
         NUnitTestSuite lastTestSuite = nUnitTestSuites.get(nUnitTestSuites.size() - 1);
         List<TestCase> result = new ArrayList<TestCase>();
