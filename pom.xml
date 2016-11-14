@@ -44,6 +44,7 @@
         <module>zephyr-sync-report-api</module>
         <module>zephyr-sync-report-cucumber</module>
         <module>zephyr-sync-report-junit</module>
+        <module>zephyr-sync-report-nunit</module>
         <module>zephyr-sync-util</module>
         <module>zephyr-sync-report-allure</module>
         <module>zephyr-sync-cli</module>
