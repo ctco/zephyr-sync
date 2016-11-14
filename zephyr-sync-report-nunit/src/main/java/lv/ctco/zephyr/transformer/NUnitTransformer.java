@@ -8,7 +8,6 @@ import lv.ctco.zephyr.beans.testresult.nunit.NUnitTestSuite;
 import lv.ctco.zephyr.enums.TestStatus;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.stream.StreamSource;
