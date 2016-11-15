@@ -34,6 +34,10 @@ public class Config {
         properties.put(property, value);
     }
 
+    public void setProperty(ConfigProperty property, Boolean value) {
+        properties.put(property, value == null ? null : value.toString());
+    }
+
     public void applyDefault(ConfigProperty property, String value) {
         if (properties.get(property) == null) {
             setProperty(property, value);

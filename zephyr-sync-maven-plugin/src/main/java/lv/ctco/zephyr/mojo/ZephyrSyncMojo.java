@@ -40,7 +40,8 @@ public class ZephyrSyncMojo extends AbstractMojo implements Config.Loader{
     String testCaseUniqueIdAttribute;
     @Parameter
     String severityAttribute;
-
+    @Parameter
+    Boolean autoCreateTestCycle;
 
 
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -63,9 +64,10 @@ public class ZephyrSyncMojo extends AbstractMojo implements Config.Loader{
         config.setProperty(ConfigProperty.TEST_CYCLE, testCycle);
         config.setProperty(ConfigProperty.JIRA_URL, jiraUrl);
         config.setProperty(ConfigProperty.REPORT_PATH, reportPath);
-        config.setProperty(ConfigProperty.ORDERED_STEPS, orderedSteps == null ? null : orderedSteps.toString());
-        config.setProperty(ConfigProperty.FORCE_STORY_LINK, forceStoryLink == null ? null : forceStoryLink.toString());
+        config.setProperty(ConfigProperty.ORDERED_STEPS, orderedSteps);
+        config.setProperty(ConfigProperty.FORCE_STORY_LINK, forceStoryLink);
         config.setProperty(ConfigProperty.TEST_CASE_UNIQUE_ID, testCaseUniqueIdAttribute);
         config.setProperty(ConfigProperty.SEVERITY, severityAttribute);
+        config.setProperty(ConfigProperty.AUTO_CREATE_TEST_CYCLE, autoCreateTestCycle);
     }
 }

@@ -17,10 +17,10 @@ import java.util.List;
 
 public class NUnitTransformer implements ReportTransformer {
 
+    private static final String NUNIT_PASSED = "Passed";
     public String getType() {
         return "nunit";
     }
-    private static final String NUNIT_PASSED = "Passed";
 
     public List<TestCase> transformToTestCases(String reportPath) {
             return transform(readNunitReport(reportPath));

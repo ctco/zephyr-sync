@@ -6,15 +6,17 @@ import lv.ctco.zephyr.beans.Metafield;
 import lv.ctco.zephyr.beans.jira.Project;
 import lv.ctco.zephyr.beans.zapi.Cycle;
 import lv.ctco.zephyr.beans.zapi.CycleList;
+import lv.ctco.zephyr.beans.zapi.NewCycle;
 import lv.ctco.zephyr.util.Utils;
 import lv.ctco.zephyr.enums.ConfigProperty;
 import lv.ctco.zephyr.util.ObjectTransformer;
+import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 import java.util.Map;
 
 import static lv.ctco.zephyr.util.HttpUtils.getAndReturnBody;
-import static lv.ctco.zephyr.util.Utils.log;
+import static lv.ctco.zephyr.util.HttpUtils.post;
 import static java.lang.String.format;
 
 public class MetaInfoRetrievalService {
@@ -78,7 +80,24 @@ public class MetaInfoRetrievalService {
                 return;
             }
         }
-        throw new ZephyrSyncException("Unable to retrieve JIRA test cycle");
+        if (Boolean.parseBoolean(config.getValue(ConfigProperty.AUTO_CREATE_TEST_CYCLE))) {
+            Utils.log("Creating new test cycle");
+            String cycleId = createNewTestCycle(projectId, versionId);
+            Utils.log("New test cycle created - " + cycleId);
+            metaInfo.setCycleId(cycleId);
+        } else {
+            throw new ZephyrSyncException("Unable to retrieve JIRA test cycle");
+        }
+    }
+
+    private String createNewTestCycle(String projectId, String versionId) throws IOException {
+        NewCycle newCycle = new NewCycle();
+        newCycle.setProjectId(projectId);
+        newCycle.setVersionId(versionId);
+        newCycle.setName(config.getValue(ConfigProperty.TEST_CYCLE));
+        HttpResponse response = post(config, "zapi/latest/cycle", newCycle);
+        Cycle cycle = ObjectTransformer.deserialize(Utils.readInputStream(response.getEntity().getContent()), Cycle.class);
+        return cycle.getId();
     }
 
 }
