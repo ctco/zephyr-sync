@@ -20,6 +20,7 @@ public class NUnitTransformer implements ReportTransformer {
     public String getType() {
         return "nunit";
     }
+    private static final String NUNIT_PASSED = "Passed";
 
     public List<TestCase> transformToTestCases(String reportPath) {
             return transform(readNunitReport(reportPath));
@@ -48,7 +49,7 @@ public class NUnitTransformer implements ReportTransformer {
             TestCase test = new TestCase();
             test.setName(testCase.getName());
             test.setUniqueId(testCase.getId());
-            test.setStatus(testCase.getResult().equals("Passed") ? TestStatus.PASSED : TestStatus.FAILED);
+            test.setStatus(NUNIT_PASSED.equals(testCase.getResult()) ? TestStatus.PASSED : TestStatus.FAILED);
             result.add(test);
         }
         return result;
