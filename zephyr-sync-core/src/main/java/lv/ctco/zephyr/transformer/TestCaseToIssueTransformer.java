@@ -18,7 +18,14 @@ public class TestCaseToIssueTransformer {
         Fields fields = issue.getFields();
         fields.setSummary(testCase.getName());
         fields.setTestCaseUniqueId(testCase.getUniqueId());
-        fields.setLabels(new String[]{"Automation"});
+
+        List<String> labels = new ArrayList<>();
+        labels.add("Automation");
+        List<String> testLabels = testCase.getLabels();
+        if (testLabels != null && testLabels.size() > 0) {
+            labels.addAll(testLabels);
+        }
+        fields.setLabels(labels.toArray(new String[labels.size()]));
 
         Metafield project = new Metafield();
         project.setKey(config.getValue(ConfigProperty.PROJECT_KEY));

@@ -50,13 +50,14 @@ public class CucumberTransformer implements ReportTransformer {
 
             for (Scenario scenario : scenarios) {
                 TestCase test = new TestCase();
-                List<String> jiraKeys = resolveJiraKeys(scenario, "@TestCaseId=");
+                List<String> jiraKeys = extractTagValues(scenario, "@TestCaseId=");
                 if (jiraKeys != null && jiraKeys.size() == 1) {
                     test.setKey(jiraKeys.get(0).toUpperCase());
                 }
                 test.setName(scenario.getName() == null ? feature.getName() : scenario.getName());
                 test.setUniqueId(generateUniqueId(feature, scenario));
-                test.setStoryKeys(resolveJiraKeys(scenario, "@Stories="));
+                test.setLabels(extractTagValues(scenario, "@Labels="));
+                test.setStoryKeys(extractTagValues(scenario, "@Stories="));
                 test.setStatus(resolveStatus(scenario));
                 test.setSteps(resolveTestSteps(scenario));
                 testCases.add(test);
@@ -92,7 +93,7 @@ public class CucumberTransformer implements ReportTransformer {
         return TestStatus.PASSED;
     }
 
-    private List<String> resolveJiraKeys(Scenario scenario, String tagPrefix) {
+    private List<String> extractTagValues(Scenario scenario, String tagPrefix) {
         Tag[] tags = scenario.getTags();
         if (tags == null || tags.length == 0) return null;
 

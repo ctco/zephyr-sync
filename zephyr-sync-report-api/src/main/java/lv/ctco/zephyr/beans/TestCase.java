@@ -12,6 +12,7 @@ public class TestCase {
     private String uniqueId;
     private String name;
     private List<String> storyKeys;
+    private List<String> labels;
     private List<TestStep> steps;
     private TestStatus status = TestStatus.NOT_EXECUTED;
     private TestLevel severity;
@@ -55,6 +56,14 @@ public class TestCase {
 
     public void setStoryKeys(List<String> storyKeys) {
         this.storyKeys = storyKeys;
+    }
+
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
     }
 
     public List<TestStep> getSteps() {
