@@ -115,7 +115,7 @@ Property | Meaning | Is mandatory? | Default value | Example
 --- | --- | --- | --- | ---
 username | User name used to connect to JIRA | yes | | `TECXYZ01`
 password | Password for the user to connect to JIRA | yes | | `password`
-reportType | Type of report that will be synchronized to Zephyr | yes/no | Default value could be detected in runtime | One of `cucumber`, `allure` or `junit`
+reportType | Type of report that will be synchronized to Zephyr | yes/no | Default value could be detected in runtime | One of `cucumber`, `allure`, `junit` or `nunit`
 projectKey | Key of project in JIRA | yes | | `XYZ`
 releaseVersion | FixVersion of a project to link Test results to | yes | | `1.0`
 testCycle | Zephyr test cycle where the results will be linked to | no | `Regression` |
