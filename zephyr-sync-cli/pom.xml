@@ -61,10 +61,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>lv.ctco.zephyr</groupId>
+            <artifactId>zephyr-sync-report-nunit</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
