@@ -18,12 +18,13 @@ import java.util.List;
 public class NUnitTransformer implements ReportTransformer {
 
     private static final String NUNIT_PASSED = "Passed";
+
     public String getType() {
         return "nunit";
     }
 
     public List<TestCase> transformToTestCases(String reportPath) {
-            return transform(readNunitReport(reportPath));
+        return transform(readNunitReport(reportPath));
     }
 
     NUnitResultTestRun readNunitReport(String path) {
@@ -42,15 +43,15 @@ public class NUnitTransformer implements ReportTransformer {
     List<TestCase> transform(NUnitResultTestRun resultTestSuite) {
         // NUnit places project name to the first test suite
         List<NUnitTestSuite> nUnitTestSuites = resultTestSuite.getTestSuite().stream().findFirst().get().flattenTestSuite();
-        // NUnit places test cases in the last test suite
-        NUnitTestSuite lastTestSuite = nUnitTestSuites.get(nUnitTestSuites.size() - 1);
-        List<TestCase> result = new ArrayList<TestCase>();
-        for (NUnitTestCase testCase : lastTestSuite.getTestCases()) {
-            TestCase test = new TestCase();
-            test.setName(testCase.getName());
-            test.setUniqueId(testCase.getId());
-            test.setStatus(NUNIT_PASSED.equals(testCase.getResult()) ? TestStatus.PASSED : TestStatus.FAILED);
-            result.add(test);
+        List<TestCase> result = new ArrayList<>();
+        for (NUnitTestSuite testSuite : nUnitTestSuites) {
+            for (NUnitTestCase testCase : testSuite.getTestCases()) {
+                TestCase test = new TestCase();
+                test.setName(testCase.getName());
+                test.setUniqueId(testCase.getId());
+                test.setStatus(NUNIT_PASSED.equals(testCase.getResult()) ? TestStatus.PASSED : TestStatus.FAILED);
+                result.add(test);
+            }
         }
         return result;
     }
