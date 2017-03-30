@@ -8,9 +8,7 @@ import lv.ctco.zephyr.beans.zapi.Execution;
 import lv.ctco.zephyr.beans.zapi.ExecutionRequest;
 import lv.ctco.zephyr.beans.zapi.ExecutionResponse;
 import lv.ctco.zephyr.beans.zapi.ZapiTestStep;
-import lv.ctco.zephyr.enums.ConfigProperty;
 import lv.ctco.zephyr.enums.TestStatus;
-import lv.ctco.zephyr.util.HttpUtils;
 import lv.ctco.zephyr.util.ObjectTransformer;
 import org.apache.http.HttpResponse;
 
@@ -21,10 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.String.format;
 import static lv.ctco.zephyr.enums.ConfigProperty.*;
 import static lv.ctco.zephyr.util.HttpUtils.*;
 import static lv.ctco.zephyr.util.Utils.log;
-import static java.lang.String.format;
 
 public class ZephyrService {
 
@@ -176,24 +174,31 @@ public class ZephyrService {
         }
 
         for (TestCase testCase : resultTestCases) {
-            if (testCase.getKey() != null) {
-                if (uniqueKeyMap.containsKey(testCase.getKey())) {
-                    testCase.setId(uniqueKeyMap.get(testCase.getKey()).getId());
-                } else {
-                    log(format("Key: %s, is not found, new Test Case should be created", testCase.getKey()));
-                    testCase.setId(null);
-                    testCase.setKey(null);
+            String testCaseKey = testCase.getKey();
+            String testCaseName = testCase.getName();
+            // case when test case can be matched by id
+            if (testCaseKey != null && uniqueKeyMap.containsKey(testCaseKey)) {
+                testCase.setId(uniqueKeyMap.get(testCaseKey).getId());
+                continue;
+            }
+            // if no exact match by id was found, trying to match by exact name
+            if (testCaseKey == null && testCaseName != null) {
+                for (Issue issue : issues) {
+                    if (issue.getFields().getSummary().equalsIgnoreCase(testCaseName)) {
+                        testCase.setId(issue.getId());
+                        testCase.setKey(issue.getKey());
+                        continue;
+                    }
                 }
-            } else {
-                Issue issue = uniqueKeyMap.get(testCase.getUniqueId());
-                if (issue == null) {
-                    continue;
-                }
-
-                testCase.setId(issue.getId());
-                testCase.setKey(issue.getKey());
+            }
+            // if no exact match by id or by name, creating new one
+            if (testCaseKey != null) {
+                log(format("Key: %s, is not found, new Test Case should be created", testCaseKey));
+                testCase.setId(null);
+                testCase.setKey(null);
+                continue;
             }
         }
     }
-
 }
+
