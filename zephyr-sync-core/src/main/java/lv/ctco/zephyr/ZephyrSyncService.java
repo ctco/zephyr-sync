@@ -46,6 +46,12 @@ public class ZephyrSyncService {
         }
 
         zephyrService.linkExecutionsToTestCycle(metaInfo, testCases);
+        // needed to update correcty status of test cases
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            System.out.print("Error not catched ! ");
+        }
         zephyrService.updateExecutionStatuses(testCases);
 
     }
