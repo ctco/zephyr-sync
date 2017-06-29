@@ -27,7 +27,7 @@ public class ZephyrSyncService {
         zephyrService = new ZephyrService(config);
     }
 
-    public void execute() throws IOException {
+    public void execute() throws IOException, InterruptedException {
         authService.authenticateInJira();
 
         MetaInfo metaInfo = metaInfoRetrievalService.retrieve();

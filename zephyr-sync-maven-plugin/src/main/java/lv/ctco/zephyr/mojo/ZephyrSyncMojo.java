@@ -17,31 +17,31 @@ import java.io.IOException;
 public class ZephyrSyncMojo extends AbstractMojo implements Config.Loader{
 
     @Parameter(required = true)
-    String username;
+    private String username;
     @Parameter(required = true)
-    String password;
+    private String password;
     @Parameter
-    String reportType;
+    private String reportType;
     @Parameter(required = true)
-    String projectKey;
+    private String projectKey;
     @Parameter(required = true)
-    String releaseVersion;
+    private String releaseVersion;
     @Parameter
-    String testCycle;
+    private String testCycle;
     @Parameter(required = true)
-    String jiraUrl;
+    private String jiraUrl;
     @Parameter(required = true)
-    String reportPath;
+    private String reportPath;
     @Parameter
-    Boolean orderedSteps;
+    private Boolean orderedSteps;
     @Parameter
-    Boolean forceStoryLink;
+    private Boolean forceStoryLink;
     @Parameter
-    String testCaseUniqueIdAttribute;
+    private String testCaseUniqueIdAttribute;
     @Parameter
-    String severityAttribute;
+    private String severityAttribute;
     @Parameter
-    Boolean autoCreateTestCycle;
+    private Boolean autoCreateTestCycle;
 
 
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -52,6 +52,8 @@ public class ZephyrSyncMojo extends AbstractMojo implements Config.Loader{
             syncService.execute();
         } catch (IOException e) {
             throw new MojoExecutionException("Cannot sync test results into zephyr", e);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
