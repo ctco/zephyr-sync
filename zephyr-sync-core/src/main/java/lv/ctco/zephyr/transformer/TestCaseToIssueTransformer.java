@@ -17,6 +17,7 @@ public class TestCaseToIssueTransformer {
         Issue issue = new Issue();
         Fields fields = issue.getFields();
         fields.setSummary(testCase.getName());
+        fields.setDescription(testCase.getDescription());
         fields.setTestCaseUniqueId(testCase.getUniqueId());
 
         List<String> labels = new ArrayList<>();

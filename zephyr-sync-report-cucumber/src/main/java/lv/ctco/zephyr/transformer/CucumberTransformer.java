@@ -58,6 +58,7 @@ public class CucumberTransformer implements ReportTransformer {
                 test.setUniqueId(generateUniqueId(feature, scenario));
                 test.setLabels(extractTagValues(scenario, "@Labels="));
                 test.setStoryKeys(extractTagValues(scenario, "@Stories="));
+                test.setDescription(extractTagValue(scenario, "@Description="));
                 test.setStatus(resolveStatus(scenario));
                 test.setSteps(resolveTestSteps(scenario));
                 testCases.add(test);
@@ -107,6 +108,19 @@ public class CucumberTransformer implements ReportTransformer {
             }
         }
         return result.size() != 0 ? result : null;
+    }
+
+    private String extractTagValue(Scenario scenario, String tagPrefix) {
+        Tag[] tags = scenario.getTags();
+        if (tags == null || tags.length == 0) return null;
+
+        for (Tag tag : tags) {
+            String tagName = tag.getName();
+            if (tagName.toLowerCase().startsWith(tagPrefix.toLowerCase())) {
+                return tagName.substring(tagPrefix.length()).trim();
+            }
+        }
+        return null;
     }
 
     private List<TestStep> resolveTestSteps(Scenario scenario) {

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Fields {
     private String summary;
+    private String description;
     private String testCaseUniqueId;
     private Metafield project;
     private Metafield assignee;
@@ -23,6 +24,14 @@ public class Fields {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @ConfigBasedJsonProperty(ConfigProperty.TEST_CASE_UNIQUE_ID)

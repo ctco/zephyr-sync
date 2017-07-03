@@ -11,6 +11,7 @@ public class TestCase {
     private String key;
     private String uniqueId;
     private String name;
+    private String description;
     private List<String> storyKeys;
     private List<String> labels;
     private List<TestStep> steps;
@@ -48,6 +49,14 @@ public class TestCase {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<String> getStoryKeys() {
