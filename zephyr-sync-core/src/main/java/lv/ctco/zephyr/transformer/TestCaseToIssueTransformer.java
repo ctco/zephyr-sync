@@ -17,9 +17,10 @@ public class TestCaseToIssueTransformer {
     public static Issue transform(Config config, TestCase testCase) {
 
         Issue issue = new Issue();
-        Metafield issueType = new Metafield();
-        issueType.setName(IssueType.TEST.getName());
-        issue.getFields().setIssuetype(issueType);
+        Fields fields = issue.getFields();
+        fields.setSummary(testCase.getName());
+        fields.setDescription(testCase.getDescription());
+        fields.setTestCaseUniqueId(testCase.getUniqueId());
 
         if (config.getValue(ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID).equalsIgnoreCase("true")){
             issue.getFields().setTestCaseUniqueId(testCase.getUniqueId());
