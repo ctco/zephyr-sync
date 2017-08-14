@@ -58,7 +58,7 @@ public class CucumberTransformer implements ReportTransformer {
                 test.setUniqueId(generateUniqueId(feature, scenario));
                 test.setLabels(extractTagValues(scenario, "@Labels="));
                 test.setStoryKeys(extractTagValues(scenario, "@Stories="));
-                test.setDescription(extractTagValue(scenario, "@Description="));
+                test.setDescription(scenario.getDescription() == null ? (feature.getDescription() == null ? "" :  feature.getDescription()): scenario.getDescription());
                 test.setStatus(resolveStatus(scenario));
                 test.setSteps(resolveTestSteps(scenario));
                 testCases.add(test);
