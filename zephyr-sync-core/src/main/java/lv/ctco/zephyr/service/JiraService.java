@@ -60,11 +60,11 @@ public class JiraService {
     }
 
     public void createTestIssue(TestCase testCase) throws IOException {
-        log("Creating JIRA test issue with Unique ID " + testCase.getUniqueId());
+        log("INFO: Creating JIRA Test item with Name: \"" + testCase.getName() + "\".");
         Issue issue = TestCaseToIssueTransformer.transform(config, testCase);
 
         HttpResponse response = post(config, "api/2/issue", issue);
-        ensureResponse(response, 201, "Could not create a Test issue in JIRA");
+        ensureResponse(response, 201, "ERROR: Could not create JIRA Test item");
 
         String responseBody = readInputStream(response.getEntity().getContent());
         Metafield result = ObjectTransformer.deserialize(responseBody, Metafield.class);
@@ -72,6 +72,7 @@ public class JiraService {
             testCase.setId(Integer.valueOf(result.getId()));
             testCase.setKey(result.getKey());
         }
+        log("INFO: Created. JIRA Test item Id is: [" + testCase.getKey() + "].");
     }
 
     public void linkToStory(TestCase testCase) throws IOException {

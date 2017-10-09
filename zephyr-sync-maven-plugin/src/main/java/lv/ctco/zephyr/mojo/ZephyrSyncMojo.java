@@ -37,7 +37,7 @@ public class ZephyrSyncMojo extends AbstractMojo implements Config.Loader{
     @Parameter
     private Boolean forceStoryLink;
     @Parameter
-    private String testCaseUniqueIdAttribute;
+    private Boolean generateTestCaseUniqueId;
     @Parameter
     private String severityAttribute;
     @Parameter
@@ -58,18 +58,18 @@ public class ZephyrSyncMojo extends AbstractMojo implements Config.Loader{
     }
 
     public void execute(Config config) {
-        config.setProperty(ConfigProperty.USERNAME, username);
-        config.setProperty(ConfigProperty.PASSWORD, password);
-        config.setProperty(ConfigProperty.REPORT_TYPE, reportType);
-        config.setProperty(ConfigProperty.PROJECT_KEY, projectKey);
-        config.setProperty(ConfigProperty.RELEASE_VERSION, releaseVersion);
-        config.setProperty(ConfigProperty.TEST_CYCLE, testCycle);
-        config.setProperty(ConfigProperty.JIRA_URL, jiraUrl);
-        config.setProperty(ConfigProperty.REPORT_PATH, reportPath);
-        config.setProperty(ConfigProperty.ORDERED_STEPS, orderedSteps);
-        config.setProperty(ConfigProperty.FORCE_STORY_LINK, forceStoryLink);
-        config.setProperty(ConfigProperty.TEST_CASE_UNIQUE_ID, testCaseUniqueIdAttribute);
-        config.setProperty(ConfigProperty.SEVERITY, severityAttribute);
-        config.setProperty(ConfigProperty.AUTO_CREATE_TEST_CYCLE, autoCreateTestCycle);
+        config.setValue(ConfigProperty.USERNAME, username);
+        config.setValue(ConfigProperty.PASSWORD, password);
+        config.setValue(ConfigProperty.REPORT_TYPE, reportType);
+        config.setValue(ConfigProperty.PROJECT_KEY, projectKey);
+        config.setValue(ConfigProperty.RELEASE_VERSION, releaseVersion);
+        config.setValue(ConfigProperty.TEST_CYCLE, testCycle);
+        config.setValue(ConfigProperty.JIRA_URL, jiraUrl);
+        config.setValue(ConfigProperty.REPORT_PATH, reportPath);
+        config.setValue(ConfigProperty.ORDERED_STEPS, orderedSteps);
+        config.setValue(ConfigProperty.FORCE_STORY_LINK, forceStoryLink);
+        config.setValue(ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID, generateTestCaseUniqueId);
+        config.setValue(ConfigProperty.SEVERITY, severityAttribute);
+        config.setValue(ConfigProperty.AUTO_CREATE_TEST_CYCLE, autoCreateTestCycle);
     }
 }
