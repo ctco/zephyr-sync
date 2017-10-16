@@ -1,4 +1,4 @@
-[![Build Status](https://snap-ci.com/ctco/zephyr-sync/branch/master/build_image)](https://snap-ci.com/ctco/zephyr-sync/branch/master)
+[![wercker status](https://app.wercker.com/status/5f663d10cb826a4ebbbfaa7d2f6f1420/s/master "wercker status")](https://app.wercker.com/project/byKey/5f663d10cb826a4ebbbfaa7d2f6f1420)
 
 # Zephyr Sync
 
