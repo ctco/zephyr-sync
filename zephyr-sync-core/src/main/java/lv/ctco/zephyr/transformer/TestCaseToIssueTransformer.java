@@ -25,7 +25,7 @@ public class TestCaseToIssueTransformer {
         return issue;
     }
 
-    private static void setIssueFieldsFromTestCaseAttributes(Issue issue, TestCase testCase){
+    public static void setIssueFieldsFromTestCaseAttributes(Issue issue, TestCase testCase){
         issue.getFields().setSummary(testCase.getName());
         issue.getFields().setDescription(testCase.getDescription());
 
@@ -54,7 +54,7 @@ public class TestCaseToIssueTransformer {
         issue.getFields().setLabels(labels.toArray(new String[labels.size()]));
     }
 
-    private static void setIssueFieldsFromConfig(Issue issue, Config config){
+    public static void setIssueFieldsFromConfig(Issue issue, Config config){
         for (ConfigProperty property : ConfigProperty.values()) {
             String value = config.getValue(property);
             Metafield metafield = new Metafield();

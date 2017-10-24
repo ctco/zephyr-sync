@@ -26,7 +26,7 @@ public class Config {
         validateMandatoryAttributes();
     }
 
-    Config() {
+    public Config() {
         properties = new HashMap<ConfigProperty, String>();
     }
 
