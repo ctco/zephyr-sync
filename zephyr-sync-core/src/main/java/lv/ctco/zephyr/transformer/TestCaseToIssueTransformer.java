@@ -3,7 +3,6 @@ package lv.ctco.zephyr.transformer;
 import lv.ctco.zephyr.Config;
 import lv.ctco.zephyr.beans.Metafield;
 import lv.ctco.zephyr.beans.TestCase;
-import lv.ctco.zephyr.beans.jira.Fields;
 import lv.ctco.zephyr.beans.jira.Issue;
 import lv.ctco.zephyr.enums.ConfigProperty;
 import lv.ctco.zephyr.enums.IssueType;
@@ -15,28 +14,24 @@ public class TestCaseToIssueTransformer {
 
 
     public static Issue transform(Config config, TestCase testCase) {
-
         Issue issue = new Issue();
-        Fields fields = issue.getFields();
-        fields.setSummary(testCase.getName());
-        fields.setDescription(testCase.getDescription());
-        fields.setTestCaseUniqueId(testCase.getUniqueId());
 
         if (config.getValue(ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID).equalsIgnoreCase("true")){
             issue.getFields().setTestCaseUniqueId(testCase.getUniqueId());
         }
 
-        setIssueFieldByTestCaseAttributes(issue, testCase);
-
-        for (ConfigProperty configProperty : ConfigProperty.values()){
-            setIssueFieldByConfigProperty(issue, config, configProperty);
-        }
-
+        setIssueFieldsFromTestCaseAttributes(issue, testCase);
+        setIssueFieldsFromConfig(issue, config);
         return issue;
     }
 
-    private static void setIssueFieldByTestCaseAttributes(Issue issue, TestCase testCase){
+    private static void setIssueFieldsFromTestCaseAttributes(Issue issue, TestCase testCase){
         issue.getFields().setSummary(testCase.getName());
+        issue.getFields().setDescription(testCase.getDescription());
+
+        Metafield issueType = new Metafield();
+        issueType.setName(IssueType.TEST.getName());
+        issue.getFields().setIssuetype(issueType);
 
         if (testCase.getSeverity() != null) {
             Metafield severity = new Metafield();
@@ -59,27 +54,29 @@ public class TestCaseToIssueTransformer {
         issue.getFields().setLabels(labels.toArray(new String[labels.size()]));
     }
 
-    private static void setIssueFieldByConfigProperty(Issue issue, Config config, ConfigProperty property){
-        String value = config.getValue(property);
-        Metafield metafield = new Metafield();
-        if (value != null){
-            if (property.equals(ConfigProperty.ASSIGNEE)){
-                metafield.setName(value);
-                issue.getFields().setAssignee(metafield);
-            }
-            if (property.equals(ConfigProperty.SEVERITY)){
-                metafield.setName(value);
-                issue.getFields().setSeverity(metafield);
-            }
-            if (property.equals(ConfigProperty.RELEASE_VERSION)){
-                metafield.setName(value);
-                List<Metafield> versions = new ArrayList<Metafield>(1);
-                versions.add(metafield);
-                issue.getFields().setVersions(versions);
-            }
-            if (property.equals(ConfigProperty.PROJECT_KEY)) {
-                metafield.setKey(value);
-                issue.getFields().setProject(metafield);
+    private static void setIssueFieldsFromConfig(Issue issue, Config config){
+        for (ConfigProperty property : ConfigProperty.values()) {
+            String value = config.getValue(property);
+            Metafield metafield = new Metafield();
+            if (value != null) {
+                if (property.equals(ConfigProperty.ASSIGNEE)) {
+                    metafield.setName(value);
+                    issue.getFields().setAssignee(metafield);
+                }
+                if (property.equals(ConfigProperty.SEVERITY)) {
+                    metafield.setName(value);
+                    issue.getFields().setSeverity(metafield);
+                }
+                if (property.equals(ConfigProperty.RELEASE_VERSION)) {
+                    metafield.setName(value);
+                    List<Metafield> versions = new ArrayList<Metafield>(1);
+                    versions.add(metafield);
+                    issue.getFields().setVersions(versions);
+                }
+                if (property.equals(ConfigProperty.PROJECT_KEY)) {
+                    metafield.setKey(value);
+                    issue.getFields().setProject(metafield);
+                }
             }
         }
     }
