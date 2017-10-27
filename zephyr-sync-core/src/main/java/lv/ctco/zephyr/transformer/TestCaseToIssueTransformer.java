@@ -15,7 +15,6 @@ public class TestCaseToIssueTransformer {
 
     public static Issue transform(Config config, TestCase testCase) {
         Issue issue = new Issue();
-
         if (config.getValue(ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID).equalsIgnoreCase("true")){
             issue.getFields().setTestCaseUniqueId(testCase.getUniqueId());
         }
