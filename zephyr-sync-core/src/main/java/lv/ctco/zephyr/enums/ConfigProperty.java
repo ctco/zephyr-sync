@@ -8,14 +8,16 @@ public enum ConfigProperty {
     REPORT_TYPE("reportType", true),
     PROJECT_KEY("projectKey", true),
     RELEASE_VERSION("releaseVersion", true),
-    TEST_CYCLE("testCycle", false, "Regression"),
+    TEST_CYCLE("testCycle", true),
     JIRA_URL("jiraUrl", true),
     REPORT_PATH("reportPath", true),
     ORDERED_STEPS("orderedSteps", false, "false"),
     FORCE_STORY_LINK("forceStoryLink", false, "true"),
-    TEST_CASE_UNIQUE_ID("testCaseUniqueIdAttribute", false, "environment"),
-    SEVERITY("severityAttribute", false, "customfield_10067"),
-    AUTO_CREATE_TEST_CYCLE("autoCreateTestCycle", false, "true")
+    TEST_CASE_UNIQUE_ID("testCaseUniqueId", false),
+    GENERATE_TEST_CASE_UNIQUE_ID("generateTestCaseUniqueId", false, "false"),
+    SEVERITY("severityAttribute", false),
+    AUTO_CREATE_TEST_CYCLE("autoCreateTestCycle", false, "true"),
+    ASSIGNEE("assignee", false)
     ;
 
     private String propertyName;

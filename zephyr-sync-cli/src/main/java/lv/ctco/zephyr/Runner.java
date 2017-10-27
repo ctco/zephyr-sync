@@ -30,7 +30,7 @@ public class Runner {
                 String[] keyValue = arg.split("=");
                 String key = keyValue[0].substring(2);
                 String value = keyValue[1];
-                config.setProperty(ConfigProperty.findByName(key), value);
+                config.setValue(ConfigProperty.findByName(key), value);
             }
         }
     }

@@ -6,7 +6,7 @@ public class TestConfigLoader implements Config.Loader {
 
     public void execute(Config config) {
         for (ConfigProperty configProperty : ConfigProperty.values()) {
-            config.setProperty(configProperty, configProperty.getDefaultValue() == null ? "test" : configProperty.getDefaultValue());
+            config.setValue(configProperty, configProperty.getDefaultValue() == null ? "test" : configProperty.getDefaultValue());
         }
     }
 }

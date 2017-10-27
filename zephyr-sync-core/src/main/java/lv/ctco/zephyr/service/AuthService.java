@@ -12,6 +12,8 @@ import org.apache.http.impl.client.BasicCookieStore;
 
 import java.io.IOException;
 
+import static lv.ctco.zephyr.util.Utils.log;
+
 public class AuthService {
 
     public static final BasicCookieStore COOKIE = new BasicCookieStore();
@@ -28,7 +30,9 @@ public class AuthService {
             Login login = new Login(config.getValue(ConfigProperty.USERNAME), config.getValue(ConfigProperty.PASSWORD));
 
             HttpResponse response = HttpUtils.post(config, "auth/1/session", login);
-
+            if (response.getStatusLine().getStatusCode() != 200) {
+                log("ERROR: JIRA authentication failed: " + response.getStatusLine().getProtocolVersion() + " " + response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+            }
             SessionResponse loginResponse = ObjectTransformer.deserialize(Utils.readInputStream(response.getEntity().getContent()), SessionResponse.class);
             if (loginResponse != null) {
                 jSessionId = loginResponse.getSession().get("value");

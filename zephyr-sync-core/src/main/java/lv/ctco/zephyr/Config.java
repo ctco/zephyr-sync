@@ -26,28 +26,32 @@ public class Config {
         validateMandatoryAttributes();
     }
 
-    Config() {
+    public Config() {
         properties = new HashMap<ConfigProperty, String>();
     }
 
-    public void setProperty(ConfigProperty property, String value) {
+    public String getValue(ConfigProperty property) {
+        return properties.get(property);
+    }
+
+    public void setValue(ConfigProperty property, String value) {
         properties.put(property, value);
     }
 
-    public void setProperty(ConfigProperty property, Boolean value) {
+    public void setValue(ConfigProperty property, Boolean value) {
         properties.put(property, value == null ? null : value.toString());
     }
 
     public void applyDefault(ConfigProperty property, String value) {
         if (properties.get(property) == null) {
-            setProperty(property, value);
+            setValue(property, value);
         }
     }
 
     void applyDefaults() {
         for (ConfigProperty property : ConfigProperty.values()) {
-            if (properties.get(property) == null && property.getDefaultValue() != null) {
-                setProperty(property, property.getDefaultValue());
+            if (property.getDefaultValue() != null) {
+                applyDefault(property, property.getDefaultValue());
             }
         }
     }
@@ -62,16 +66,5 @@ public class Config {
         if (!mandatoryProperties.isEmpty()) {
             throw new ZephyrSyncException("The following properties are not passed: " + mandatoryProperties);
         }
-    }
-
-    public String getValue(ConfigProperty property) {
-        String value = properties.get(property);
-        if (value != null) {
-            return value.trim();
-        }
-        if (property.getDefaultValue() != null) {
-            return property.getDefaultValue();
-        }
-        throw new ZephyrSyncException("Property " + property.name() + " is not found in the config file!");
     }
 }
