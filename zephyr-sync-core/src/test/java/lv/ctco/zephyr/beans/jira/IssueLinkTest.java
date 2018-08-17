@@ -10,7 +10,7 @@ public class IssueLinkTest {
 
     @Test
     public void testSerialize() throws Exception {
-        String json = ObjectTransformer.serialize(new IssueLink("aaa", "bbb"));
+        String json = ObjectTransformer.serialize(new IssueLink("aaa", "bbb", "Reference"));
         System.out.println(json);
         assertThat(json, is(not(nullValue())));
     }
