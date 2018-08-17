@@ -126,3 +126,4 @@ forceStoryLink | If set to true, sync will be failed in case at least one test d
 testCaseUniqueIdAttribute | Name of JIRA attribute that is used to store unique ID of test case (will be used for test case tracking, updates and linking) | no | `environment` |
 severityAttribute | Name of JIRA attribute that stores 'Severity' attribute | no | `customfield_10067` |
 autoCreateTestCycle | Should new test cycle be created automatically | no | `true` |
+linkType | Link type between Test issue and related story (used in combination with `@Stories` annotation) | no | `Reference` |

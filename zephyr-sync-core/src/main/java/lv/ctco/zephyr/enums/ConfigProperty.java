@@ -17,7 +17,8 @@ public enum ConfigProperty {
     GENERATE_TEST_CASE_UNIQUE_ID("generateTestCaseUniqueId", false, "false"),
     SEVERITY("severityAttribute", false),
     AUTO_CREATE_TEST_CYCLE("autoCreateTestCycle", false, "true"),
-    ASSIGNEE("assignee", false)
+    ASSIGNEE("assignee", false),
+    LINK_TYPE("linkType", false, "Reference")
     ;
 
     private String propertyName;

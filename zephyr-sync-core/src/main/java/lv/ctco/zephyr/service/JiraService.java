@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static lv.ctco.zephyr.enums.ConfigProperty.FORCE_STORY_LINK;
+import static lv.ctco.zephyr.enums.ConfigProperty.LINK_TYPE;
 import static lv.ctco.zephyr.enums.ConfigProperty.PROJECT_KEY;
 import static lv.ctco.zephyr.util.HttpUtils.*;
 import static lv.ctco.zephyr.util.Utils.log;
@@ -86,7 +87,7 @@ public class JiraService {
 
         log("Linking Test issue " + testCase.getKey() + " to Stories " + testCase.getStoryKeys());
         for (String storyKey : storyKeys) {
-            HttpResponse response = post(config, "api/2/issueLink", new IssueLink(testCase.getKey(), storyKey.toUpperCase()));
+            HttpResponse response = post(config, "api/2/issueLink", new IssueLink(testCase.getKey(), storyKey.toUpperCase(), config.getValue(LINK_TYPE)));
             ensureResponse(response, 201, "Could not link Test issue: " + testCase.getId() + " to Story " + storyKey + ". " +
                     "Please check if Story issue exists and is valid");
         }

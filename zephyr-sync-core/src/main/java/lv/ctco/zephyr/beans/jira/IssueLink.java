@@ -8,9 +8,9 @@ public class IssueLink {
     private Metafield inwardIssue;
     private Metafield outwardIssue;
 
-    public IssueLink(String source, String target) {
+    public IssueLink(String source, String target, String type) {
         this.type = new Metafield();
-        this.type.setName("Reference");
+        this.type.setName(type);
         this.inwardIssue = new Metafield();
         this.inwardIssue.setKey(source);
         this.outwardIssue = new Metafield();
