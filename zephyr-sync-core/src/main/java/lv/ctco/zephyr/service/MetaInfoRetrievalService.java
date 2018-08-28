@@ -39,7 +39,7 @@ public class MetaInfoRetrievalService {
         String response = getAndReturnBody(config, format("api/2/project/%s", projectKey));
         Project project = ObjectTransformer.deserialize(response, Project.class);
 
-        if (project == null || !project.getKey().equals(projectKey)) {
+        if (project == null || project.getKey() == null || !project.getKey().equals(projectKey)) {
             throw new ZephyrSyncException("Improper JIRA project retrieved");
         }
 
