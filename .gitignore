@@ -1,6 +1,9 @@
 #IDE specific files
 .idea
 **/*.iml
+.project
+.classpath
+.settings
 
 #Java output
 **/target/
