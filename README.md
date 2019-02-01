@@ -111,19 +111,20 @@ task zephyrSync {
 
 This is the list of possible configuration items:
 
-Property | Meaning | Is mandatory? | Default value | Example
---- | --- | --- | --- | ---
-username | User name used to connect to JIRA | yes | | `TECXYZ01`
-password | Password for the user to connect to JIRA | yes | | `password`
-reportType | Type of report that will be synchronized to Zephyr | yes/no | Default value could be detected in runtime | One of `cucumber`, `allure`, `junit` or `nunit`
-projectKey | Key of project in JIRA | yes | | `XYZ`
-releaseVersion | FixVersion of a project to link Test results to | yes | | `1.0`
-testCycle | Zephyr test cycle where the results will be linked to | no | `Regression` |
-jiraUrl | URL of JIRA (it's RESTful API endpoint) | yes | | `http://jira.yourcompany.com/rest/`
-reportPath | Path on the file system where reports are stored | yes | | For cucumeber: `${project.build.directory}/cucumber-report/report.json`
-orderedSteps | If set to true, numerical prefix for test steps will be put (hierarchical) | no | `false` |
-forceStoryLink | If set to true, sync will be failed in case at least one test doesn't have @Stories=ABC-XXX annotation | no | `true` |
-testCaseUniqueIdAttribute | Name of JIRA attribute that is used to store unique ID of test case (will be used for test case tracking, updates and linking) | no | `environment` |
-severityAttribute | Name of JIRA attribute that stores 'Severity' attribute | no | `customfield_10067` |
-autoCreateTestCycle | Should new test cycle be created automatically | no | `true` |
-linkType | Link type between Test issue and related story (used in combination with `@Stories` annotation) | no | `Reference` |
+Property                  | Meaning                                                                                                                        | Is mandatory? | Default value | Example
+---                       | ---                                                                                                                            | ---           | ---           | ---
+username                  | User name used to connect to JIRA                                                                                              | yes           |               | `TECXYZ01`
+password                  | Password for the user to connect to JIRA                                                                                       | yes           |               | `password`
+reportType                | Type of report that will be synchronized to Zephyr                                                                             | yes           |               | One of `cucumber`, `allure`, `junit` or `nunit`
+projectKey                | Key of project in JIRA                                                                                                         | yes           |               | `XYZ`
+releaseVersion            | FixVersion of a project to link Test results to                                                                                | yes           |               | `1.0`
+testCycle                 | Zephyr test cycle where the results will be linked to                                                                          | yes           |               |
+jiraUrl                   | URL of JIRA (it's RESTful API endpoint)                                                                                        | yes           |               | `http://jira.yourcompany.com/jira/rest/
+reportPath                | Path on the file system where reports are stored                                                                               | yes           |               | For cucumber: `${project.build.directory}/cucumber-report/report.json`
+orderedSteps              | If set to true, numerical prefix for test steps will be put (hierarchical)                                                     | no            | `false`       |
+forceStoryLink            | If set to true, sync will be failed in case at least one test doesn't have @Stories=ABC-XXX annotation                         | no            | `true`        |
+generateTestCaseUniqueId  | Name of JIRA attribute that is used to store unique ID of test case (will be used for test case tracking, updates and linking) | no            | `false`       |
+severityAttribute         | Name of JIRA attribute that stores 'Severity' attribute                                                                        | no            |               |
+autoCreateTestCycle       | Should new test cycle be created automatically                                                                                 | no            | `true`        |
+assignee                  | Specify an Assignee                                                                                                            | no            |               |
+linkType                  | Link type between Test issue and related story (used in combination with `@Stories` annotation)                                | no            | `Reference`   |
