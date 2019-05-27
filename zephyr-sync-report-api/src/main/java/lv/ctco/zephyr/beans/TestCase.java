@@ -10,6 +10,7 @@ public class TestCase {
     private Integer id;
     private String key;
     private String uniqueId;
+    private String suiteName;
     private String name;
     private String description;
     private List<String> storyKeys;
@@ -105,5 +106,13 @@ public class TestCase {
 
     public void setPriority(TestLevel priority) {
         this.priority = priority;
+    }
+
+    public String getSuiteName() {
+        return suiteName;
+    }
+
+    public void setSuiteName(String suiteName) {
+        this.suiteName = suiteName;
     }
 }

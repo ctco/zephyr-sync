@@ -54,6 +54,7 @@ public class CucumberTransformer implements ReportTransformer {
                 if (jiraKeys != null && jiraKeys.size() == 1) {
                     test.setKey(jiraKeys.get(0).toUpperCase());
                 }
+                test.setSuiteName(feature.getName());
                 test.setName(scenario.getName() == null ? feature.getName() : scenario.getName());
                 test.setUniqueId(generateUniqueId(feature, scenario));
                 test.setLabels(extractTagValues(scenario, "@Labels="));
