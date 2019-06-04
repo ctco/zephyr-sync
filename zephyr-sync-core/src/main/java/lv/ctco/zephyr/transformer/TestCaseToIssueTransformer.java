@@ -6,6 +6,7 @@ import lv.ctco.zephyr.beans.TestCase;
 import lv.ctco.zephyr.beans.jira.Issue;
 import lv.ctco.zephyr.enums.ConfigProperty;
 import lv.ctco.zephyr.enums.IssueType;
+import org.apache.http.util.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class TestCaseToIssueTransformer {
 
     public static Issue transform(Config config, TestCase testCase) {
         Issue issue = new Issue();
-        if (config.getValue(ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID).equalsIgnoreCase("true")){
+        if (config.getValue(ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID).equalsIgnoreCase("true")) {
             issue.getFields().setTestCaseUniqueId(testCase.getUniqueId());
         }
 
@@ -24,9 +25,12 @@ public class TestCaseToIssueTransformer {
         return issue;
     }
 
-    public static void setIssueFieldsFromTestCaseAttributes(Issue issue, TestCase testCase){
+    public static void setIssueFieldsFromTestCaseAttributes(Issue issue, TestCase testCase) {
         issue.getFields().setSummary(testCase.getName());
-        issue.getFields().setDescription(testCase.getDescription());
+        issue.getFields().setDescription(
+                TextUtils.isBlank(testCase.getDescription()) ?
+                        testCase.getSuiteName() :
+                        testCase.getDescription());
 
         Metafield issueType = new Metafield();
         issueType.setName(IssueType.TEST.getName());
@@ -53,7 +57,7 @@ public class TestCaseToIssueTransformer {
         issue.getFields().setLabels(labels.toArray(new String[labels.size()]));
     }
 
-    public static void setIssueFieldsFromConfig(Issue issue, Config config){
+    public static void setIssueFieldsFromConfig(Issue issue, Config config) {
         for (ConfigProperty property : ConfigProperty.values()) {
             String value = config.getValue(property);
             Metafield metafield = new Metafield();
