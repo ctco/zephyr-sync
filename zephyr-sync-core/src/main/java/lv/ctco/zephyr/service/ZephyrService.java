@@ -95,7 +95,7 @@ public class ZephyrService {
         Execution execution = new Execution();
         execution.setCycleId(metaInfo.getCycleId());
         execution.setIssues(keys);
-        execution.setMethod(1);
+        execution.setMethod("1");
         execution.setProjectId(metaInfo.getProjectId());
         execution.setVersionId(metaInfo.getVersionId());
 

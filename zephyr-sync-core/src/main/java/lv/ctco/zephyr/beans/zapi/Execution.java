@@ -10,7 +10,7 @@ public class Execution {
     private String versionId;
     private List<String> issues;
     private String cycleId;
-    private int method;
+    private String method;
 
     public Integer getId() {
         return id;
@@ -60,11 +60,11 @@ public class Execution {
         this.cycleId = cycleId;
     }
 
-    public int getMethod() {
+    public String getMethod() {
         return method;
     }
 
-    public void setMethod(int method) {
+    public void setMethod(String method) {
         this.method = method;
     }
 }
