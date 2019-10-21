@@ -1,0 +1,222 @@
+{
+  "name": "Account Correlation from Source",
+  "status": "passed",
+  "stage": "finished",
+  "description": "Free text",
+  "steps": [
+    {
+      "name": "variable \"attrName\" is created with value \"X213DDF\"",
+      "status": "passed",
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [
+        {
+          "name": "variable",
+          "value": "identityName"
+        },
+        {
+          "name": "value",
+          "value": "X213DDF"
+        }
+      ],
+      "start": 1571642115424,
+      "stop": 1571642115428
+    },
+    {
+      "name": "Account 'X213DDF' is created",
+      "status": "passed",
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [
+        {
+          "name": "description",
+          "value": "Account 'X213DDF' is created"
+        }
+      ],
+      "start": 1571642115625,
+      "stop": 1571642119721
+    },
+    {
+      "name": "When something happens",
+      "status": "passed",
+      "stage": "finished",
+      "steps": [
+        {
+          "name": "Task Was Executed",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [
+            {
+              "name": "description",
+              "value": "Task Was Executed"
+            }
+          ],
+          "start": 1571642122100,
+          "stop": 1571642138763
+        },
+        {
+          "name": "Response Status Code",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [
+            {
+              "name": "description",
+              "value": "Response Status Code"
+            }
+          ],
+          "start": 1571642140048,
+          "stop": 1571642140048
+        },
+        {
+          "name": "Then Task should finish successfully",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [
+            {
+              "name": "description",
+              "value": "Then Task should finish successfully"
+            }
+          ],
+          "start": 1571642152051,
+          "stop": 1571642159937
+        },
+        {
+          "name": "Response Status Code",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [
+            {
+              "name": "description",
+              "value": "Response Status Code"
+            }
+          ],
+          "start": 1571642160811,
+          "stop": 1571642160811
+        },
+        {
+          "name": "Then Task should finish successfully",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [
+            {
+              "name": "description",
+              "value": "Then Task should finish successfully"
+            }
+          ],
+          "start": 1571642172813,
+          "stop": 1571642180830
+        },
+        {
+          "name": "Response Status Code",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [
+            {
+              "name": "description",
+              "value": "Response Status Code"
+            }
+          ],
+          "start": 1571642181533,
+          "stop": 1571642181533
+        }
+      ],
+      "attachments": [],
+      "parameters": [
+        {
+          "name": "retryPolicy",
+          "value": "ExecutionRetryPolicy(retries=3, retryDelaySeconds=10)"
+        },
+        {
+          "name": "description",
+          "value": "Then account exists"
+        }
+      ],
+      "start": 1571642119773,
+      "stop": 1571642191533
+    }
+  ],
+  "attachments": [],
+  "parameters": [],
+  "start": 1571642114947,
+  "stop": 1571642191771,
+  "uuid": "a0145cb2-fa25-431f-a41e-35e961d6813c",
+  "historyId": "e550472ec5be75d009af90a5a6f3dca7",
+  "fullName": "com.any.package.aggregation.AggregationTest.accountAggregation",
+  "labels": [
+    {
+      "name": "tag",
+      "value": "SomeTags"
+    },
+    {
+      "name": "epic",
+      "value": "EPIC-1111"
+    },
+    {
+      "name": "feature",
+      "value": "FEAT-555"
+    },
+    {
+      "name": "label",
+      "value": "any-label"
+    },
+    {
+      "name": "label",
+      "value": "another-label"
+    },
+    {
+      "name": "story",
+      "value": "STRY-9999"
+    },
+    {
+      "name": "story",
+      "value": "STRY-1123"
+    },
+    {
+      "name": "host",
+      "value": "somehost"
+    },
+    {
+      "name": "thread",
+      "value": "ForkJoinPool-1-worker-1(12)"
+    },
+    {
+      "name": "framework",
+      "value": "junit-platform"
+    },
+    {
+      "name": "language",
+      "value": "java"
+    },
+    {
+      "name": "package",
+      "value": "com.any.package.aggregation.AggregationTest"
+    },
+    {
+      "name": "testClass",
+      "value": "com.any.package.aggregation.AggregationTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "accountAggregation"
+    },
+    {
+      "name": "suite",
+      "value": "[Label] - Account Aggregation"
+    }
+  ],
+  "links": []
+}
