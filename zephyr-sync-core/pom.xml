@@ -5,7 +5,7 @@
     <parent>
         <groupId>lv.ctco.zephyr</groupId>
         <artifactId>zephyr-sync-master</artifactId>
-        <version>0.0.15</version>
+        <version>0.0.16-SNAPSHOT</version>
     </parent>
 
     <artifactId>zephyr-sync-core</artifactId>
