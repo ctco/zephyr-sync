@@ -5,6 +5,9 @@ import lv.ctco.zephyr.beans.TestStep;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static lv.ctco.zephyr.enums.TestLevel.MEDIUM;
@@ -27,8 +30,9 @@ public class AllureTransformerTest {
     }
 
     @Test
-    public void transformToTestCases() {
-        List<TestCase> testCases = transformer.transformToTestCases(AllureTransformerTest.class.getResource("/reports").getPath().substring(1));
+    public void transformToTestCases() throws URISyntaxException {
+        Path reportPath = Paths.get(AllureTransformerTest.class.getResource("/reports").toURI());
+        List<TestCase> testCases = transformer.transformToTestCases(reportPath.toString());
         assertThat(testCases, hasSize(1));
 
         TestCase testCase = testCases.get(0);
