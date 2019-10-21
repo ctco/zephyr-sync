@@ -128,3 +128,4 @@ severityAttribute         | Name of JIRA attribute that stores 'Severity' attrib
 autoCreateTestCycle       | Should new test cycle be created automatically                                                                                 | no            | `true`        |
 assignee                  | Specify an Assignee                                                                                                            | no            |               |
 linkType                  | Link type between Test issue and related story (used in combination with `@Stories` annotation)                                | no            | `Reference`   |
+linkDirection             | Link direction between Test issue and related story                                                                            | no            | `inward`      | One of `inward` or `outward`

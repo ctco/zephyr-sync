@@ -6,26 +6,29 @@ import lv.ctco.zephyr.beans.Metafield;
 import lv.ctco.zephyr.beans.TestCase;
 import lv.ctco.zephyr.beans.jira.Issue;
 import lv.ctco.zephyr.beans.jira.IssueLink;
+import lv.ctco.zephyr.beans.jira.IssueLinkDirection;
 import lv.ctco.zephyr.beans.jira.SearchResponse;
 import lv.ctco.zephyr.transformer.TestCaseToIssueTransformer;
-import lv.ctco.zephyr.util.HttpUtils;
 import lv.ctco.zephyr.util.ObjectTransformer;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.String.format;
 import static lv.ctco.zephyr.enums.ConfigProperty.FORCE_STORY_LINK;
+import static lv.ctco.zephyr.enums.ConfigProperty.LINK_DIRECTION;
 import static lv.ctco.zephyr.enums.ConfigProperty.LINK_TYPE;
 import static lv.ctco.zephyr.enums.ConfigProperty.PROJECT_KEY;
-import static lv.ctco.zephyr.util.HttpUtils.*;
+import static lv.ctco.zephyr.util.HttpUtils.ensureResponse;
+import static lv.ctco.zephyr.util.HttpUtils.getAndReturnBody;
+import static lv.ctco.zephyr.util.HttpUtils.post;
 import static lv.ctco.zephyr.util.Utils.log;
 import static lv.ctco.zephyr.util.Utils.readInputStream;
-import static java.lang.String.format;
 
 public class JiraService {
 
-    private static final int TOP = 20;
+    private static final int TOP = 500;
 
     private Config config;
 
@@ -87,10 +90,18 @@ public class JiraService {
 
         log("Linking Test issue " + testCase.getKey() + " to Stories " + testCase.getStoryKeys());
         for (String storyKey : storyKeys) {
-            HttpResponse response = post(config, "api/2/issueLink", new IssueLink(testCase.getKey(), storyKey.toUpperCase(), config.getValue(LINK_TYPE)));
+            HttpResponse response = post(config, "api/2/issueLink", createIssueLink(testCase, storyKey));
             ensureResponse(response, 201, "Could not link Test issue: " + testCase.getId() + " to Story " + storyKey + ". " +
                     "Please check if Story issue exists and is valid");
         }
+    }
+
+    private IssueLink createIssueLink(TestCase testCase, String storyKey) {
+        IssueLinkDirection direction = IssueLinkDirection.ofValue(config.getValue(LINK_DIRECTION));
+        if (direction == IssueLinkDirection.inward) {
+            return new IssueLink(testCase.getKey(), storyKey.toUpperCase(), config.getValue(LINK_TYPE));
+        }
+        return new IssueLink(storyKey.toUpperCase(), testCase.getKey(), config.getValue(LINK_TYPE));
     }
 
 }

@@ -1,16 +1,15 @@
 package lv.ctco.zephyr.mojo;
 
-import java.io.IOException;
-
+import lv.ctco.zephyr.Config;
+import lv.ctco.zephyr.ZephyrSyncService;
+import lv.ctco.zephyr.enums.ConfigProperty;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
-import lv.ctco.zephyr.Config;
-import lv.ctco.zephyr.ZephyrSyncService;
-import lv.ctco.zephyr.enums.ConfigProperty;
+import java.io.IOException;
 
 @Mojo( name = "sync" )
 public class ZephyrSyncMojo
@@ -108,6 +107,12 @@ public class ZephyrSyncMojo
     @Parameter
     private String linkType;
 
+    /**
+     * Link direction between Test issue and related story (one of: inward, outward)
+     */
+    @Parameter
+    private String linkDirection;
+
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
@@ -143,5 +148,8 @@ public class ZephyrSyncMojo
         config.setValue( ConfigProperty.GENERATE_TEST_CASE_UNIQUE_ID, generateTestCaseUniqueId );
         config.setValue( ConfigProperty.SEVERITY, severityAttribute );
         config.setValue( ConfigProperty.AUTO_CREATE_TEST_CYCLE, autoCreateTestCycle );
+        config.setValue( ConfigProperty.ASSIGNEE, assignee );
+        config.setValue( ConfigProperty.LINK_TYPE, linkType );
+        config.setValue( ConfigProperty.LINK_DIRECTION, linkDirection);
     }
 }
