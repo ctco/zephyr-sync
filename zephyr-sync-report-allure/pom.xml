@@ -9,6 +9,9 @@
 
     <artifactId>zephyr-sync-report-allure</artifactId>
 
+    <properties>
+        <qameta.allure.version>2.13.0</qameta.allure.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>lv.ctco.zephyr</groupId>
@@ -20,6 +23,16 @@
             <artifactId>zephyr-sync-util</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -30,15 +43,9 @@
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>ru.yandex.qatools.allure</groupId>
-                    <artifactId>allure-commons</artifactId>
-                    <version>1.4.23</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-                    </exclusions>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-java-commons</artifactId>
+                    <version>${qameta.allure.version}</version>
                 </dependency>
             </dependencies>
         </profile>

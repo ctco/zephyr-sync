@@ -1,71 +1,74 @@
 package lv.ctco.zephyr.transformer;
 
-import lv.ctco.zephyr.ZephyrSyncException;
+import io.qameta.allure.AllureResultsReader;
+import io.qameta.allure.FileSystemResultsReader;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.model.Label;
+import io.qameta.allure.model.StepResult;
+import io.qameta.allure.model.TestResult;
 import lv.ctco.zephyr.beans.TestCase;
 import lv.ctco.zephyr.beans.TestStep;
 import lv.ctco.zephyr.enums.TestLevel;
 import lv.ctco.zephyr.enums.TestStatus;
-import ru.yandex.qatools.allure.commons.AllureFileUtils;
-import ru.yandex.qatools.allure.model.Label;
-import ru.yandex.qatools.allure.model.SeverityLevel;
-import ru.yandex.qatools.allure.model.Step;
-import ru.yandex.qatools.allure.model.TestCaseResult;
-import ru.yandex.qatools.allure.model.TestSuiteResult;
 
-import java.io.File;
-import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static java.util.Collections.singletonList;
+import static io.qameta.allure.util.ResultsUtils.EPIC_LABEL_NAME;
+import static io.qameta.allure.util.ResultsUtils.FEATURE_LABEL_NAME;
+import static io.qameta.allure.util.ResultsUtils.SEVERITY_LABEL_NAME;
+import static io.qameta.allure.util.ResultsUtils.STORY_LABEL_NAME;
+import static io.qameta.allure.util.ResultsUtils.TAG_LABEL_NAME;
 
 public class AllureTransformer implements ReportTransformer {
 
+    private static final List<String> STORY_LABELS = Arrays.asList(EPIC_LABEL_NAME, FEATURE_LABEL_NAME, STORY_LABEL_NAME);
+    private static final List<String> LABEL_LABELS = Arrays.asList("label", TAG_LABEL_NAME);
+
+    @Override
     public String getType() {
         return "allure";
     }
 
+    @Override
     public List<TestCase> transformToTestCases(String reportPath) {
         return transform(readAllureReport(reportPath));
     }
 
-    List<TestSuiteResult> readAllureReport(String path) {
-        File file = new File(path);
-        try {
-            if (file.isDirectory()) {
-                return AllureFileUtils.unmarshalSuites(file);
-            } else {
-                return singletonList(AllureFileUtils.unmarshal(file));
-            }
-        } catch (IOException e) {
-            throw new ZephyrSyncException("Cannot read Allure report", e);
-        }
+    private Stream<TestResult> readAllureReport(String path) {
+        AllureResultsReader reader = new FileSystemResultsReader(Paths.get(path));
+        return reader.readTestResults();
     }
 
-    List<TestCase> transform(List<TestSuiteResult> result) {
-        List<TestCase> testCases = new ArrayList<TestCase>();
-        for (TestSuiteResult currentTestSuiteResult : result) {
-            for (TestCaseResult currentTestCaseResult : currentTestSuiteResult.getTestCases()) {
-                TestCase currentTestCase = new TestCase();
-                currentTestCase.setName(currentTestCaseResult.getName());
-                currentTestCase.setUniqueId(generateUniqueId(currentTestCaseResult));
-                currentTestCase.setStoryKeys(getStoryKeys(currentTestCaseResult));
-                currentTestCase.setKey(getJiraKey(currentTestCaseResult));
-                currentTestCase.setStatus(getStatus(currentTestCaseResult));
-                currentTestCase.setSeverity(getSeverity(currentTestCaseResult));
-                currentTestCase.setSteps(addTestSteps(currentTestCaseResult.getSteps(), 1));
-                testCases.add(currentTestCase);
-            }
-        }
-        return testCases;
+    private List<TestCase> transform(Stream<TestResult> results) {
+        return results.map(this::transform).collect(Collectors.toList());
     }
 
-    private String generateUniqueId(TestCaseResult testCaseResult) {
-        return testCaseResult.getName();
+    private TestCase transform(TestResult testResult) {
+        TestCase currentTestCase = new TestCase();
+        currentTestCase.setName(testResult.getName());
+        currentTestCase.setUniqueId(generateUniqueId(testResult));
+        currentTestCase.setDescription(testResult.getDescription());
+        currentTestCase.setStoryKeys(getStoryKeys(testResult));
+        currentTestCase.setStatus(getStatus(testResult));
+        currentTestCase.setSeverity(getSeverity(testResult));
+        currentTestCase.setLabels(getLabels(testResult));
+        currentTestCase.setSteps(addTestSteps(testResult.getSteps(), 1));
+        return currentTestCase;
     }
 
-    private TestStatus getStatus(TestCaseResult testCaseResult) {
-        switch (testCaseResult.getStatus()) {
+    private String generateUniqueId(TestResult testResult) {
+        return testResult.getName();
+    }
+
+    private TestStatus getStatus(TestResult testResult) {
+        switch (testResult.getStatus()) {
             case FAILED:
                 return TestStatus.FAILED;
             case BROKEN:
@@ -77,16 +80,16 @@ public class AllureTransformer implements ReportTransformer {
         }
     }
 
-    private TestLevel getSeverity(TestCaseResult currentTestCaseResult) {
+    private TestLevel getSeverity(TestResult testResult) {
         String severity = "";
 
-        for (Label currentLabel : currentTestCaseResult.getLabels()) {
-            if (currentLabel.getName().equalsIgnoreCase("severity") && !currentLabel.getValue().isEmpty()) {
+        for (Label currentLabel : testResult.getLabels()) {
+            if (currentLabel.getName().equalsIgnoreCase(SEVERITY_LABEL_NAME) && !currentLabel.getValue().isEmpty()) {
                 severity = currentLabel.getValue();
             }
         }
         if (!(severity.isEmpty())) {
-            switch (SeverityLevel.fromValue(severity)) {
+            switch (fromValue(severity)) {
                 case TRIVIAL:
                     return TestLevel.TRIVIAL;
                 case MINOR:
@@ -98,37 +101,40 @@ public class AllureTransformer implements ReportTransformer {
                 default:
                     return TestLevel.MAJOR;
             }
-
         }
         return null;
     }
 
-    private List<String> getStoryKeys(TestCaseResult currentTestCaseResult) {
-        List<String> storyKeys = new ArrayList<String>();
-
-        for (Label currentLabel : currentTestCaseResult.getLabels()) {
-            if (currentLabel.getName().equalsIgnoreCase("story") && !currentLabel.getValue().isEmpty()) {
-                storyKeys.add(currentLabel.getValue());
-            }
-        }
-        return storyKeys.size() != 0 ? storyKeys : null;
+    private SeverityLevel fromValue(String severity) {
+        return Stream.of(SeverityLevel.values())
+                .filter(level -> level.value().equals(severity))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unsupported severity level: "+ severity));
     }
 
-    private String getJiraKey(TestCaseResult currentTestCaseResult) {
-        for (Label currentLabel : currentTestCaseResult.getLabels()) {
-            if (currentLabel.getName().equalsIgnoreCase("testid") && !currentLabel.getValue().isEmpty()) {
-                return currentLabel.getValue().toUpperCase();
-            }
-        }
-        return null;
+    private List<String> getStoryKeys(TestResult testResult) {
+        return getAllureLabels(testResult, label -> STORY_LABELS.contains(label.getName()));
     }
 
-    private List<TestStep> addTestSteps(List<Step> steps, int level) {
+    private List<String> getLabels(TestResult testResult) {
+        return getAllureLabels(testResult, label -> LABEL_LABELS.contains(label.getName()));
+    }
+
+    private List<String> getAllureLabels(TestResult testResult, Predicate<Label> predicate) {
+        Set<String> stories = testResult.getLabels().stream()
+                .filter(predicate)
+                .filter(label -> !label.getValue().isEmpty())
+                .map(Label::getValue)
+                .collect(Collectors.toSet());
+        return stories.isEmpty() ? null : new ArrayList<>(stories);
+    }
+
+    private List<TestStep> addTestSteps(List<StepResult> steps, int level) {
         List<TestStep> result = new ArrayList<TestStep>(steps.size());
-        for (Step step : steps) {
+        for (StepResult stepResult : steps) {
             TestStep testStep = new TestStep();
-            testStep.setDescription(step.getName());
-            testStep.setSteps(addTestSteps(step.getSteps(), level + 1));
+            testStep.setDescription(stepResult.getName());
+            testStep.setSteps(addTestSteps(stepResult.getSteps(), level + 1));
             result.add(testStep);
         }
         return result;
