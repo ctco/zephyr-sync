@@ -9,29 +9,27 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 import static lv.ctco.zephyr.enums.TestLevel.MEDIUM;
 import static lv.ctco.zephyr.enums.TestStatus.PASSED;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 
 public class AllureTransformerTest {
 
     AllureTransformer transformer;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         transformer = new AllureTransformer();
     }
 
     @Test
     public void transformToTestCases() throws URISyntaxException {
-        Path reportPath = Paths.get(AllureTransformerTest.class.getResource("/reports").toURI());
+        Path reportPath = Paths.get(Objects.requireNonNull(AllureTransformerTest.class.getResource("/reports")).toURI());
         List<TestCase> testCases = transformer.transformToTestCases(reportPath.toString());
         assertThat(testCases, hasSize(1));
 

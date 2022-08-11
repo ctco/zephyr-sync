@@ -1,0 +1,189 @@
+{
+  "uuid": "95ac0685-edf4-4a8e-9775-3c135af0d4a0",
+  "historyId": "8af11fdc80757ce83955eeb04e0335b5",
+  "testCaseId": "[engine:junit-jupiter]/[class:com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest]/[method:nothingToReview()]",
+  "testCaseName": "Empty certification UI test",
+  "fullName": "com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest.nothingToReview",
+  "labels": [
+    {
+      "name": "tag",
+      "value": "SomeTags"
+    },
+    {
+      "name": "junit.platform.uniqueid",
+      "value": "[engine:junit-jupiter]/[class:com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest]/[method:nothingToReview()]"
+    },
+    {
+      "name": "label",
+      "value": "any-label"
+    },
+    {
+      "name": "label",
+      "value": "another-label"
+    },
+    {
+      "name": "epic",
+      "value": "EPIC-1111"
+    },
+    {
+      "name": "feature",
+      "value": "FEAT-555"
+    },
+    {
+      "name": "story",
+      "value": "STRY-9999"
+    },
+    {
+      "name": "story",
+      "value": "STRY-1123"
+    },
+    {
+      "name": "host",
+      "value": "host"
+    },
+    {
+      "name": "thread",
+      "value": "8820@host.ForkJoinPool-1-worker-1(13)"
+    },
+    {
+      "name": "framework",
+      "value": "junit-platform"
+    },
+    {
+      "name": "language",
+      "value": "java"
+    },
+    {
+      "name": "package",
+      "value": "com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest"
+    },
+    {
+      "name": "testClass",
+      "value": "com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "nothingToReview"
+    },
+    {
+      "name": "suite",
+      "value": "Recertify Azure guests UI tests"
+    }
+  ],
+  "links": [],
+  "name": "Account Correlation from Source",
+  "status": "passed",
+  "stage": "finished",
+  "description": "Free text",
+  "steps": [
+    {
+      "name": "variable \"attrName\" is created with value \"X213DDF\"",
+      "status": "passed",
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [
+        {
+          "name": "description",
+          "value": "variable \"attrName\" is created with value \"X213DDF\""
+        }
+      ],
+      "start": 1660126100348,
+      "stop": 1660126112565
+    },
+    {
+      "name": "Account 'X213DDF' is created",
+      "status": "passed",
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [
+        {
+          "name": "description",
+          "value": "Account 'X213DDF' is created"
+        }
+      ],
+      "start": 1660126112657,
+      "stop": 1660126123533
+    },
+    {
+      "name": "When something happens",
+      "status": "passed",
+      "stage": "finished",
+      "steps": [
+        {
+          "name": "$(\"webdriver\") create()",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [],
+          "start": 1660126114900,
+          "stop": 1660126121597
+        },
+        {
+          "name": "$(\"webdriver\") create()",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [],
+          "start": 1660126114900,
+          "stop": 1660126121597
+        },
+        {
+          "name": "$(\"webdriver\") create()",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [],
+          "start": 1660126114900,
+          "stop": 1660126121597
+        },	{
+          "name": "$(\"webdriver\") create()",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [],
+          "start": 1660126114900,
+          "stop": 1660126121597
+        },
+        {
+          "name": "$(\"webdriver\") create()",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [],
+          "start": 1660126114900,
+          "stop": 1660126121597
+        },
+        {
+          "name": "$(\"webdriver\") create()",
+          "status": "passed",
+          "stage": "finished",
+          "steps": [],
+          "attachments": [],
+          "parameters": [],
+          "start": 1660126114900,
+          "stop": 1660126121597
+        }
+      ],
+      "attachments": [],
+      "parameters": [
+        {
+          "name": "description",
+          "value": "When something happens"
+        }
+      ],
+      "start": 1660126124746,
+      "stop": 1660126124839
+    }
+  ],
+  "attachments": [],
+  "parameters": [],
+  "start": 1660126099341,
+  "stop": 1660126128442
+}

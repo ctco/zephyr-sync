@@ -1,8 +1,7 @@
 package lv.ctco.zephyr.transformer;
 
-import io.qameta.allure.AllureResultsReader;
-import io.qameta.allure.FileSystemResultsReader;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.qameta.allure.model.Label;
 import io.qameta.allure.model.StepResult;
 import io.qameta.allure.model.TestResult;
@@ -11,20 +10,17 @@ import lv.ctco.zephyr.beans.TestStep;
 import lv.ctco.zephyr.enums.TestLevel;
 import lv.ctco.zephyr.enums.TestStatus;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static io.qameta.allure.util.ResultsUtils.EPIC_LABEL_NAME;
-import static io.qameta.allure.util.ResultsUtils.FEATURE_LABEL_NAME;
-import static io.qameta.allure.util.ResultsUtils.SEVERITY_LABEL_NAME;
-import static io.qameta.allure.util.ResultsUtils.STORY_LABEL_NAME;
-import static io.qameta.allure.util.ResultsUtils.TAG_LABEL_NAME;
+import static io.qameta.allure.internal.shadowed.jackson.databind.DeserializationFeature.*;
+import static io.qameta.allure.internal.shadowed.jackson.databind.MapperFeature.*;
+import static io.qameta.allure.util.ResultsUtils.*;
 
 public class AllureTransformer implements ReportTransformer {
 
@@ -42,8 +38,29 @@ public class AllureTransformer implements ReportTransformer {
     }
 
     private Stream<TestResult> readAllureReport(String path) {
-        AllureResultsReader reader = new FileSystemResultsReader(Paths.get(path));
-        return reader.readTestResults();
+        ObjectMapper mapper = getAllureMapper();
+        return Arrays.stream(Objects.requireNonNull(Paths.get(path).toFile().listFiles())).map(file ->
+                readTestResultFile(mapper, file));
+    }
+
+    private TestResult readTestResultFile(ObjectMapper allureMapper, File testResultFile) {
+        try {
+            return allureMapper.readValue(testResultFile, TestResult.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private ObjectMapper getAllureMapper() {
+        ObjectMapper mapper = new io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper();
+        mapper.configure(USE_WRAPPER_NAME_AS_PROPERTY_NAME, true);
+        mapper.configure(ACCEPT_CASE_INSENSITIVE_ENUMS, true);
+        mapper.configure(ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+        mapper.configure(READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+        mapper.configure(FAIL_ON_IGNORED_PROPERTIES, false);
+        mapper.configure(FAIL_ON_NUMBERS_FOR_ENUMS, false);
+        mapper.configure(FAIL_ON_NULL_FOR_PRIMITIVES, false);
+        return mapper;
     }
 
     private List<TestCase> transform(Stream<TestResult> results) {
@@ -70,7 +87,6 @@ public class AllureTransformer implements ReportTransformer {
     private TestStatus getStatus(TestResult testResult) {
         switch (testResult.getStatus()) {
             case FAILED:
-                return TestStatus.FAILED;
             case BROKEN:
                 return TestStatus.FAILED;
             case PASSED:
@@ -109,7 +125,7 @@ public class AllureTransformer implements ReportTransformer {
         return Stream.of(SeverityLevel.values())
                 .filter(level -> level.value().equals(severity))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unsupported severity level: "+ severity));
+                .orElseThrow(() -> new IllegalArgumentException("Unsupported severity level: " + severity));
     }
 
     private List<String> getStoryKeys(TestResult testResult) {
