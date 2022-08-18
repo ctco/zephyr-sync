@@ -4,14 +4,14 @@
 
     <groupId>lv.ctco.zephyr</groupId>
     <artifactId>zephyr-sync-master</artifactId>
-    <version>0.0.16-SNAPSHOT</version>
+    <version>0.0.16</version>
     <packaging>pom</packaging>
 
     <scm>
         <connection>scm:git:git@github.com:ctco/zephyr-sync.git</connection>
         <developerConnection>scm:git:git@github.com:ctco/zephyr-sync.git</developerConnection>
         <url>git@github.com:ctco/zephyr-sync.git</url>
-        <tag>HEAD</tag>
+        <tag>zephyr-sync-master-0.0.16</tag>
     </scm>
 
     <name>zephyr-sync-master</name>
