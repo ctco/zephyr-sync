@@ -1,9 +1,9 @@
 {
-  "uuid": "95ac0685-edf4-4a8e-9775-3c135af0d4a0",
-  "historyId": "8af11fdc80757ce83955eeb04e0335b5",
-  "testCaseId": "[engine:junit-jupiter]/[class:com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest]/[method:nothingToReview()]",
-  "testCaseName": "Empty certification UI test",
-  "fullName": "com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest.nothingToReview",
+  "uuid": "2a83b634-b0a2-4fa4-af22-8316347b5cb6",
+  "historyId": "9f5a6ed1a6ea934d4e2d7c804828bf31",
+  "testCaseId": "[engine:junit-jupiter]/[class:com.company.SuiteSetup]/[test-factory:testName()]/[dynamic-test:#2]",
+  "testCaseName": "Setting up group 'group' for group removed test cases'",
+  "fullName": "com.company.SuiteSetup.testName",
   "labels": [
     {
       "name": "tag",
@@ -11,7 +11,27 @@
     },
     {
       "name": "junit.platform.uniqueid",
-      "value": "[engine:junit-jupiter]/[class:com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest]/[method:nothingToReview()]"
+      "value": "[engine:junit-jupiter]/[class:com.company.SuiteSetup]/[test-factory:testName()]/[dynamic-test:#2]"
+    },
+    {
+      "name": "host",
+      "value": "host"
+    },
+    {
+      "name": "thread",
+      "value": "13852@host.ForkJoinPool-1-worker-7(19)"
+    },
+    {
+      "name": "framework",
+      "value": "junit-platform"
+    },
+    {
+      "name": "language",
+      "value": "java"
+    },
+    {
+      "name": "epic",
+      "value": "EPIC-1111"
     },
     {
       "name": "label",
@@ -20,10 +40,6 @@
     {
       "name": "label",
       "value": "another-label"
-    },
-    {
-      "name": "epic",
-      "value": "EPIC-1111"
     },
     {
       "name": "feature",
@@ -38,36 +54,20 @@
       "value": "STRY-1123"
     },
     {
-      "name": "host",
-      "value": "host"
-    },
-    {
-      "name": "thread",
-      "value": "8820@host.ForkJoinPool-1-worker-1(13)"
-    },
-    {
-      "name": "framework",
-      "value": "junit-platform"
-    },
-    {
-      "name": "language",
-      "value": "java"
-    },
-    {
       "name": "package",
-      "value": "com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest"
+      "value": "com.company.SuiteSetup"
     },
     {
       "name": "testClass",
-      "value": "com.swissre.iax.e2e.feature.custmngmnt.ui.EmptyRecertificationListTest"
+      "value": "com.company.SuiteSetup"
     },
     {
       "name": "testMethod",
-      "value": "nothingToReview"
+      "value": "testName"
     },
     {
       "name": "suite",
-      "value": "Recertify Azure guests UI tests"
+      "value": "Setup CPV2 Test Suite"
     }
   ],
   "links": [],
@@ -81,30 +81,52 @@
       "status": "passed",
       "stage": "finished",
       "steps": [],
-      "attachments": [],
+      "attachments": [
+        {
+          "name": "Request",
+          "source": "33a97aa8-1a94-4487-8b57-032dfedfde34-attachment.html",
+          "type": "text/html"
+        },
+        {
+          "name": "Response",
+          "source": "cf22af2f-6215-4448-a422-384a23c40030-attachment.html",
+          "type": "text/html"
+        }
+      ],
       "parameters": [
         {
           "name": "description",
-          "value": "variable \"attrName\" is created with value \"X213DDF\""
+          "value": "Given CPV2 group is created"
         }
       ],
-      "start": 1660126100348,
-      "stop": 1660126112565
+      "start": 1660918310089,
+      "stop": 1660918310383
     },
     {
       "name": "Account 'X213DDF' is created",
       "status": "passed",
       "stage": "finished",
       "steps": [],
-      "attachments": [],
+      "attachments": [
+        {
+          "name": "Request",
+          "source": "33a97aa8-1a94-4487-8b57-032dfedfde34-attachment.html",
+          "type": "text/html"
+        },
+        {
+          "name": "Response",
+          "source": "cf22af2f-6215-4448-a422-384a23c40030-attachment.html",
+          "type": "text/html"
+        }
+      ],
       "parameters": [
         {
           "name": "description",
-          "value": "Account 'X213DDF' is created"
+          "value": "Given CPV2 group is created"
         }
       ],
-      "start": 1660126112657,
-      "stop": 1660126123533
+      "start": 1660918310089,
+      "stop": 1660918310383
     },
     {
       "name": "When something happens",
@@ -171,19 +193,40 @@
           "stop": 1660126121597
         }
       ],
-      "attachments": [],
+      "attachments": [
+        {
+          "name": "Request",
+          "source": "c37fb1ba-9ae0-40a3-8313-9f31584b5df7-attachment.html",
+          "type": "text/html"
+        },
+        {
+          "name": "Response",
+          "source": "d7083dd2-7b33-4140-9f4b-8aaf1c559caa-attachment.html",
+          "type": "text/html"
+        },
+        {
+          "name": "Request",
+          "source": "f2fcaeef-63af-45df-8ee9-281d04534a99-attachment.html",
+          "type": "text/html"
+        },
+        {
+          "name": "Response",
+          "source": "35e9f70e-0c42-4fd2-95ef-d5acba2128ab-attachment.html",
+          "type": "text/html"
+        }
+      ],
       "parameters": [
         {
           "name": "description",
-          "value": "When something happens"
+          "value": "Given PRE entitlement 'group' is deleted"
         }
       ],
-      "start": 1660126124746,
-      "stop": 1660126124839
+      "start": 1660918310383,
+      "stop": 1660918315940
     }
   ],
   "attachments": [],
   "parameters": [],
-  "start": 1660126099341,
-  "stop": 1660126128442
+  "start": 1660918310088,
+  "stop": 1660918315940
 }
