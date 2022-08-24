@@ -39,8 +39,9 @@ public class AllureTransformer implements ReportTransformer {
 
     private Stream<TestResult> readAllureReport(String path) {
         ObjectMapper mapper = getAllureMapper();
-        return Arrays.stream(Objects.requireNonNull(Paths.get(path).toFile().listFiles())).map(file ->
-                readTestResultFile(mapper, file));
+        return Arrays.stream(Objects.requireNonNull(Paths.get(path).toFile().listFiles()))
+                .filter(file -> file.getName().endsWith("-result.json"))
+                .map(file -> readTestResultFile(mapper, file));
     }
 
     private TestResult readTestResultFile(ObjectMapper allureMapper, File testResultFile) {
@@ -146,7 +147,7 @@ public class AllureTransformer implements ReportTransformer {
     }
 
     private List<TestStep> addTestSteps(List<StepResult> steps, int level) {
-        List<TestStep> result = new ArrayList<TestStep>(steps.size());
+        List<TestStep> result = new ArrayList<>(steps.size());
         for (StepResult stepResult : steps) {
             TestStep testStep = new TestStep();
             testStep.setDescription(stepResult.getName());

@@ -1,0 +1,42 @@
+<div>POST to https://eampr-ci.swissreapps-np.com/rest/workflows/Task%20Runner/launch</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;workflowArgs&quot;: {
+        &quot;taskName&quot;: &quot;Test Maintenance: Remove - Entitlements I Applications I Roles: PRE&quot;,
+        &quot;resultTaskName&quot;: &quot;Test Maintenance: Remove - Entitlements I Applications I Roles: PRE b9ce7188-ac67-4900-b5da-693404008b9d&quot;,
+        &quot;arguments&quot;: {
+            &quot;objectName&quot;: &quot;CPV2-P-STAGING-TESTAPM-NP-JWT&quot;,
+            &quot;objectType&quot;: &quot;ManagedAttribute&quot;
+        }
+    }
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+<h4>Cookies</h4>
+<div>
+        <div>LtpaToken2: kTnYo4nPLkkzp7iMCrmxuuWNKbhZu51gD0vaOY2uhNtgX1+OsU5tV9fUVyV9ke/GS8vBsPtHJmz3iOnaWw1ZWcVvttDeRBDN5y8zrSZTfiO2bR0pxARXVV8ICv934FtkdH/S3GckS7ioJKCUIovaPSq/Imzy5YCfJ8/D5Ypl+KxtBfANqMFxutXcFTnVUae72kpgfWsl6GL0gtkYkttubqJX4Nc0jRqvq1NBuu2iCBuOFXOonFIYqkbUrKGITDsYe0y2o1x/5v68MWuP6BOFmKgG1sH5gt5KQFljftxudl2xmTD7xxt/8D5RwxIjCgAx</div>
+</div>
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://eampr-ci.swissreapps-np.com/rest/workflows/Task%20Runner/launch&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -b &#39;LtpaToken2=kTnYo4nPLkkzp7iMCrmxuuWNKbhZu51gD0vaOY2uhNtgX1+OsU5tV9fUVyV9ke/GS8vBsPtHJmz3iOnaWw1ZWcVvttDeRBDN5y8zrSZTfiO2bR0pxARXVV8ICv934FtkdH/S3GckS7ioJKCUIovaPSq/Imzy5YCfJ8/D5Ypl+KxtBfANqMFxutXcFTnVUae72kpgfWsl6GL0gtkYkttubqJX4Nc0jRqvq1NBuu2iCBuOFXOonFIYqkbUrKGITDsYe0y2o1x/5v68MWuP6BOFmKgG1sH5gt5KQFljftxudl2xmTD7xxt/8D5RwxIjCgAx&#39; -d &#39;{
+    &quot;workflowArgs&quot;: {
+        &quot;taskName&quot;: &quot;Test Maintenance: Remove - Entitlements I Applications I Roles: PRE&quot;,
+        &quot;resultTaskName&quot;: &quot;Test Maintenance: Remove - Entitlements I Applications I Roles: PRE b9ce7188-ac67-4900-b5da-693404008b9d&quot;,
+        &quot;arguments&quot;: {
+            &quot;objectName&quot;: &quot;CPV2-P-STAGING-TESTAPM-NP-JWT&quot;,
+            &quot;objectType&quot;: &quot;ManagedAttribute&quot;
+        }
+    }
+}&#39;
+</div>
