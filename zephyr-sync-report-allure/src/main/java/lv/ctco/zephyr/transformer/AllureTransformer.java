@@ -70,7 +70,8 @@ public class AllureTransformer implements ReportTransformer {
 
     private TestCase transform(TestResult testResult) {
         TestCase currentTestCase = new TestCase();
-        currentTestCase.setName(testResult.getName());
+        //trimming name to fit into MAX length size supported by JIRA
+        currentTestCase.setName(testResult.getName().substring(0,250));
         currentTestCase.setUniqueId(generateUniqueId(testResult));
         currentTestCase.setDescription(testResult.getDescription());
         currentTestCase.setStoryKeys(getStoryKeys(testResult));
