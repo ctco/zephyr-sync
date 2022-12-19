@@ -10,7 +10,7 @@
     <artifactId>zephyr-sync-report-allure</artifactId>
 
     <properties>
-        <qameta.allure.version>2.19.0</qameta.allure.version>
+        <qameta.allure.version>2.20.1</qameta.allure.version>
     </properties>
     <dependencies>
         <dependency>
