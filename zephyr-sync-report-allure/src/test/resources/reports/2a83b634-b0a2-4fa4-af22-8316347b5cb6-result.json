@@ -1,9 +1,9 @@
 {
   "uuid": "2a83b634-b0a2-4fa4-af22-8316347b5cb6",
   "historyId": "9f5a6ed1a6ea934d4e2d7c804828bf31",
-  "testCaseId": "[engine:junit-jupiter]/[class:com.company.SuiteSetup]/[test-factory:testName()]/[dynamic-test:#2]",
-  "testCaseName": "Setting up group 'group' for group removed test cases'",
-  "fullName": "com.company.SuiteSetup.testName",
+  "testCaseId": "[engine:junit-jupiter]/[class:com.swissre.iax.e2e.feature.cpv2.setup.CPV2TestSuiteSetupTest]/[test-factory:setCPV2GroupAggregationTestRemovedGroupData()]/[dynamic-test:#2]",
+  "testCaseName": "Setting up group 'CPV2-NP-CUSTOM-MANAGE-TESTAPM-P-JWT' for group removed test cases'",
+  "fullName": "com.swissre.iax.e2e.feature.cpv2.setup.CPV2TestSuiteSetupTest.setCPV2GroupAggregationTestRemovedGroupData",
   "labels": [
     {
       "name": "tag",
@@ -11,15 +11,15 @@
     },
     {
       "name": "junit.platform.uniqueid",
-      "value": "[engine:junit-jupiter]/[class:com.company.SuiteSetup]/[test-factory:testName()]/[dynamic-test:#2]"
+      "value": "[engine:junit-jupiter]/[class:com.swissre.iax.e2e.feature.cpv2.setup.CPV2TestSuiteSetupTest]/[test-factory:setCPV2GroupAggregationTestRemovedGroupData()]/[dynamic-test:#2]"
     },
     {
       "name": "host",
-      "value": "host"
+      "value": "LVR52430"
     },
     {
       "name": "thread",
-      "value": "13852@host.ForkJoinPool-1-worker-7(19)"
+      "value": "13852@LVR52430.ForkJoinPool-1-worker-7(19)"
     },
     {
       "name": "framework",
@@ -55,15 +55,15 @@
     },
     {
       "name": "package",
-      "value": "com.company.SuiteSetup"
+      "value": "com.swissre.iax.e2e.feature.cpv2.setup.CPV2TestSuiteSetupTest"
     },
     {
       "name": "testClass",
-      "value": "com.company.SuiteSetup"
+      "value": "com.swissre.iax.e2e.feature.cpv2.setup.CPV2TestSuiteSetupTest"
     },
     {
       "name": "testMethod",
-      "value": "testName"
+      "value": "setCPV2GroupAggregationTestRemovedGroupData"
     },
     {
       "name": "suite",
@@ -218,7 +218,7 @@
       "parameters": [
         {
           "name": "description",
-          "value": "Given PRE entitlement 'group' is deleted"
+          "value": "Given PRE entitlement 'CPV2-NP-CUSTOM-MANAGE-TESTAPM-P-JWT' is deleted"
         }
       ],
       "start": 1660918310383,

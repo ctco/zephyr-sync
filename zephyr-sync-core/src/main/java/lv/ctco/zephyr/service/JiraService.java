@@ -16,13 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 import static java.lang.String.format;
-import static lv.ctco.zephyr.enums.ConfigProperty.FORCE_STORY_LINK;
-import static lv.ctco.zephyr.enums.ConfigProperty.LINK_DIRECTION;
-import static lv.ctco.zephyr.enums.ConfigProperty.LINK_TYPE;
-import static lv.ctco.zephyr.enums.ConfigProperty.PROJECT_KEY;
-import static lv.ctco.zephyr.util.HttpUtils.ensureResponse;
-import static lv.ctco.zephyr.util.HttpUtils.getAndReturnBody;
-import static lv.ctco.zephyr.util.HttpUtils.post;
+import static lv.ctco.zephyr.enums.ConfigProperty.*;
+import static lv.ctco.zephyr.util.HttpUtils.*;
 import static lv.ctco.zephyr.util.Utils.log;
 import static lv.ctco.zephyr.util.Utils.readInputStream;
 
@@ -49,9 +44,14 @@ public class JiraService {
 
         int totalCount = searchResults.getTotal();
         if (totalCount > TOP) {
-            while (issues.size() != totalCount) {
+            while (issues.size() >= totalCount) {
                 skip += TOP;
-                issues.addAll(searchInJQL(search, skip).getIssues());
+                SearchResponse newSearchResponse = searchInJQL(search, skip);
+                totalCount = newSearchResponse.getTotal();
+                if (issues.size() > totalCount) {
+                    return getTestIssues();
+                }
+                issues.addAll(newSearchResponse.getIssues());
             }
         }
         log(format("Retrieved %s Test issues\n", issues.size()));
